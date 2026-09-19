@@ -16,13 +16,22 @@
 
    TO PREVIEW ON YOUR OWN MACHINE:   ./preview.sh
    TO PUBLISH:                       ./deploy.sh
+   APP / OFFLINE:                    sw.js  (bump CACHE_VERSION there after a
+                                     big wording change, so installed phones
+                                     download the new version)
    FULL GUIDE:                       EDITING.md
   ============================================================================
 -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#1c1917">
+    <link rel="manifest" href="/manifest.webmanifest">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Patriarchs'">
     <title>The Patriarchs' Altar: Catholic Practices to Strengthen Patriarchs</title>
 
     <!-- ===== EDIT: PAGE TITLE & LINK PREVIEW =====================================
@@ -118,6 +127,60 @@
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
             background: #a8a29e;
         }
+        /* ===== PWA / MOBILE-FIRST ADDITIONS ================================= */
+        html {
+            -webkit-text-size-adjust: 100%;
+        }
+        body {
+            min-height: 100dvh;
+            -webkit-tap-highlight-color: transparent;
+            overflow-x: hidden;
+        }
+        /* Leave room for the fixed bottom navigation on phones. */
+        @media (max-width: 767px) {
+            body {
+                padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+            }
+            /* Justified text opens ugly rivers in a narrow column. */
+            .text-justify {
+                text-align: left;
+            }
+        }
+        /* Installed as an app: keep clear of the phone's status bar / notch. */
+        @media (display-mode: standalone) {
+            header {
+                padding-top: env(safe-area-inset-top, 0px);
+            }
+        }
+        #bottom-nav {
+            padding-bottom: env(safe-area-inset-bottom, 0px);
+        }
+        /* Comfortable tap targets on touch screens. */
+        @media (pointer: coarse) {
+            .filter-btn {
+                min-height: 42px;
+                display: inline-flex;
+                align-items: center;
+            }
+        }
+        /* Offline notice + install prompt: hidden by default, revealed by JS. */
+        #offline-badge {
+            display: none;
+        }
+        #offline-badge.show {
+            display: block;
+        }
+        #install-bar {
+            display: none;
+        }
+        #install-bar.show {
+            display: flex;
+        }
+        @media (min-width: 768px) {
+            #install-bar {
+                display: none !important;
+            }
+        }
     </style>
 </head>
 <!-- Chosen Palette: Warm Monastic Neutrals & Deep Amber - Parchment (#fbf9f5), Stone (#f5f5f4 / #44403c / #1c1917), Deep Amber (#b45309), Crimson Accent (#991b1b) -->
@@ -205,6 +268,20 @@
         </div>
     </header>
 
+    <!-- ===== OFFLINE NOTICE (only appears when the phone has no signal) ===== -->
+    <div id="offline-badge" class="bg-amber-900/95 text-amber-50 text-center text-xs py-2 px-4">
+        📴 Offline — you are reading a saved copy. Your progress is kept on this device.
+    </div>
+
+    <!-- ===== ADD-TO-HOME-SCREEN PROMPT (phones only, hidden once installed) ===== -->
+    <div id="install-bar" class="bg-stone-800 text-stone-200 text-xs py-2 px-4 items-center justify-between gap-3">
+        <span>📱 Add to your home screen for offline reading.</span>
+        <span class="flex items-center gap-2 shrink-0">
+            <button onclick="promptInstall()" class="bg-amber-700 hover:bg-amber-600 text-white px-3 py-1.5 rounded font-semibold whitespace-nowrap">Install</button>
+            <button onclick="dismissInstallBar()" aria-label="Dismiss install prompt" class="text-stone-400 hover:text-stone-200 px-1 py-1">✕</button>
+        </span>
+    </div>
+
     <!-- MAIN CONTAINER -->
     <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
 
@@ -278,7 +355,7 @@
             </div>
 
             <!-- DAY GRID BUTTONS -->
-            <div class="grid grid-cols-2 sm:grid-cols-5 md:grid-cols-10 gap-2" id="day-grid">
+            <div class="grid grid-cols-5 md:grid-cols-10 gap-1.5 sm:gap-2" id="day-grid">
                 <!-- Javascript dynamic population -->
             </div>
         </section>
@@ -513,8 +590,8 @@
                 reflection: `A righteous man does not passively watch the destruction of his community. Abraham negotiated with God to save a wicked city primarily because his blood relative lived there. The modern man is called to serve as a protective spiritual shield for his extended family and community, standing in the breach for those who are entirely ignorant of the danger they face. Masculine virtue demands that a man leverage his own standing before God to plead for the mercy of those who cannot, or will not, pray for themselves.`,
                 prayer: `“Lord, I stand before You today on behalf of my community and my extended family. Where there is sin, bring Your mercy. Spare them from the consequences of their actions, and let my faithfulness be a protective shield for those I love. Do not allow my pursuit of personal holiness to isolate me from the desperate needs of the world. Amen.”`,
                 charityTitle: "The Discipline of Menial Labor",
-                charityDesc: "Seek out an environment of decay, neglect, or profound need (such as a local homeless shelter, a dilapidated public park, or an impoverished urban sector) and perform two hours of grueling, unglamorous physical labor (scrubbing facilities, hauling heavy refuse, industrial kitchen prep). Must be physically exhausting, executed in complete anonymity, and completely devoid of expected gratitude to break the male ego's reliance on status.",
-                disciplineDesc: "For exactly fifteen minutes, remain on your knees on the floor before a Crucifix in total silence and absolute physical stillness. Mastery of the body through stillness, uniting localized physical discomfort with the redemptive Passion of Christ."
+                charityDesc: "Seek out an environment of decay, neglect, or profound need (such as a local homeless shelter, a dilapidated public park, or an impoverished urban sector) and perform two hours of grueling, unglamorous physical labor (scrubbing facilities, hauling heavy refuse, industrial kitchen prep). Must be physically demanding, done in complete anonymity, and without any expectation of thanks — offered in reparation for the times you have served your own status instead of your neighbour.",
+                disciplineDesc: "For exactly fifteen minutes, remain on your knees before a Crucifix in silence and stillness. Offered as a penitential act and united to the redemptive Passion of Christ: not to master the body for its own sake, but to let a repentant heart be formed in you."
             },
             {
                 day: 2,
@@ -528,9 +605,9 @@
                 theology: `Abraham must sacrifice his pride and human grievances to intercede for the very man who threatened his marriage. The prophetic office (nābîʾ) is shown to be mediatorial and outward-facing; the prophet must bring healing to the outsider, even when the prophet's own failures initiated the crisis. This prefigures Christ upon the Cross, who offered the ultimate priestly intercession for the very men executing Him.`,
                 reflection: `God healed a foreign king’s household only after the offending prophet prayed for him. The faithful man is required to be an instrument of grace not only for his friends but for his adversaries and competitors. Masculine virtue demands laying down animosity, territorialism, and the desperate need to be "right" in order to mediate God's grace to those who cause friction.`,
                 prayer: `“Father, I lift up those outside my household today, especially those who oppose me, compete with me, or cause me distress. Grant me the grace to pray for them with genuine, sacrificial love. Bring healing to their homes, resolve our conflicts, and violently humble my pride so that I may be an instrument of Your peace. Amen.”`,
-                charityTitle: "The Discipline of Humiliation",
-                charityDesc: "Identify a colleague, peer, or acquaintance with whom you have a strained, competitive, or hostile relationship. Initiate contact, admit to any wrongdoing, ask for forgiveness for your contributions to the friction (regardless of their guilt), and ask if there is anything you can do to make amends. Actively burns away the male desire for dominance.",
-                disciplineDesc: "Fifteen minutes of rigid kneeling in silence before the Crucifix. Fix your gaze on the Cross, focusing entirely on Christ's words of forgiveness ('Father, forgive them'), actively crucifying internal grievances, resentments, and defensive pride."
+                charityTitle: "The Discipline of Asking Forgiveness",
+                charityDesc: "Identify a colleague, peer, or acquaintance with whom you have a strained, competitive, or hostile relationship. Initiate contact, admit to any wrongdoing, ask for forgiveness for your contributions to the friction (regardless of their guilt), and ask if there is anything you can do to make amends. A concrete act of repentance and reparation for the friction you have caused.",
+                disciplineDesc: "Fifteen minutes of kneeling in silence before the Crucifix. Fix your gaze on the Cross, on Christ's words of forgiveness ('Father, forgive them'), laying your grievances, resentments, and defensive pride at the foot of the Cross as matters for repentance rather than arguments to be won."
             },
             {
                 day: 3,
@@ -544,9 +621,9 @@
                 theology: `The servant’s prayer is completely devoid of personal ambition; it is an act of pure, selfless stewardship. He sacrifices self-reliance, recognizing that covenant survival depends entirely on divine providence rather than management skills. Theologically, the servant acts as a type of the Holy Spirit or Christ Himself, who emptied Himself of His own will to secure a Bride—the Church.`,
                 reflection: `The faithful steward prays for success not for personal glory, wealth accumulation, or ego, but solely to serve his master's household. When a man engages in daily labor, it must be viewed as an exercise in stewardship, not self-actualization. Professional and physical efforts are consecrated tools meant to secure the thriving of family and Church.`,
                 prayer: `“Lord God, grant me success in my labor today. Strip me of my desire for personal glory, status, and the accumulation of wealth for my own comfort. Let the grueling work of my hands provide security for my family and serve the building up of Your Kingdom. Make me a faithful, invisible steward. Amen.”`,
-                charityTitle: "The Discipline of Physical Deprivation",
-                charityDesc: "Undertake a strict 24-hour fast, consuming only water. During this state of physical depletion, hunger, and irritability, perform a heavy manual chore for your local parish, an elderly neighbor, or community center. Endure without complaining, resting, or revealing your fasting state.",
-                disciplineDesc: "Fifteen minutes of rigid kneeling before the Crucifix. Unite physical hunger and fatigue to Christ carrying the wood of the Cross. Focus on the body as an instrument designed to be spent and exhausted for others."
+                charityTitle: "The Discipline of Penitential Fasting",
+                charityDesc: "Undertake a 24-hour fast, consuming only water, offered as penance and intercession. During the hunger and fatigue, perform a heavy manual chore for your parish, an elderly neighbour, or a community centre. Do not complain, cut it short, or let anyone see that you are fasting.",
+                disciplineDesc: "Fifteen minutes of kneeling before the Crucifix. Unite the hunger and fatigue of the fast to Christ carrying the wood of the Cross for our sins — a penitential offering for yourself and for those you intercede for, not a test of endurance."
             },
             {
                 day: 4,
@@ -562,7 +639,7 @@
                 prayer: `“Heavenly Father, I entrust my wife [or future wife/the women in my family] entirely to Your care. You know the burdens she carries and the quiet sorrows she hides. Answer her deepest needs, heal her wounds, and make me a source of unyielding strength, patient understanding, and priestly comfort for her. Amen.”`,
                 charityTitle: "The Discipline of Hidden Servitude",
                 charityDesc: "Identify the most physically repulsive, tedious, or exhausting household chore that your wife (or female family member/roommate) normally handles (e.g., deep-cleaning bathrooms, scrubbing baseboards). Wake up several hours before dawn to complete it perfectly. Never mention it or accept praise.",
-                disciplineDesc: "Fifteen minutes of rigid kneeling in silence before the Crucifix. Focus on the hidden, unglamorous nature of Christ's love for the Church, embracing silence as a weapon against the ego's demand for recognition."
+                disciplineDesc: "Fifteen minutes of kneeling in silence before the Crucifix. Focus on the hidden, unglamorous nature of Christ's love for the Church, embracing hiddenness as a school of humility and as reparation for the pride that wants to be seen."
             },
             {
                 day: 5,
@@ -578,7 +655,7 @@
                 prayer: `“Deliver me, Lord, from the anxieties and fears that paralyze me in the dark. I place the physical and spiritual safety of my family entirely in Your hands. You are our refuge and fortress; grant me the courage to stand unflinchingly between my household and the threats of this world. Amen.”`,
                 charityTitle: "The Discipline of Emotional Vulnerability",
                 charityDesc: "Sit down with a spouse, close friend, or spiritual mentor, look them directly in the eye, and confess a specific, deep-seated fear, anxiety, or past moral failure kept hidden out of pride. Shatters the masculine facade of invulnerability.",
-                disciplineDesc: "Fifteen minutes of rigid kneeling in silence before the Crucifix. Contemplate Christ stripped of His garments on the Cross, uniting emotional exposure to the total humiliation and vulnerability of the Savior."
+                disciplineDesc: "Fifteen minutes of kneeling in silence before the Crucifix. Contemplate Christ stripped of His garments on the Cross, uniting your own exposure to the vulnerability of the Savior who bore our shame."
             },
             {
                 day: 6,
@@ -594,7 +671,7 @@
                 prayer: `“Lord, the God who has led me all my life, I ask Your heavy blessing upon the children and youth in my care. Protect them from the evil of this age, guide their steps, and let them grow to know Your steadfast love. Give me the raw courage to speak Your truth over them without hesitation. Amen.”`,
                 charityTitle: "The Discipline of Prophetic Speech",
                 charityDesc: "Physically place hands on the head or shoulders of your child, godchild, or a younger man you mentor. Looking them directly in the eye, pray aloud over them, invoking God's blessing and calling out a specific spiritual virtue or latent strength developing in them.",
-                disciplineDesc: "Fifteen minutes of rigid kneeling before the Crucifix. Meditate on Jacob's crossed arms and Christ's nailed arms on the Cross, recognizing spiritual authority requires complete sacrifice of self."
+                disciplineDesc: "Fifteen minutes of kneeling before the Crucifix. Meditate on Jacob's crossed arms and Christ's nailed arms on the Cross, recognizing spiritual authority requires complete sacrifice of self."
             },
             {
                 day: 7,
@@ -610,7 +687,7 @@
                 prayer: `“Lord, I pray for those in my care who have wandered, rebelled, or chosen unexpected paths. Wherever they are in their journey, let them live in Your sight. Provide a path for them to flourish, protect them from their own ruin, and remind them that they are fiercely loved by You and by me. Amen.”`,
                 charityTitle: "The Discipline of the Margin",
                 charityDesc: "Sacrifice weekend rest to visit an environment completely outside your socio-economic comfort zone (prison ministry, homeless encampment, impoverished sector). Identify a marginalized man, buy him a meal, and spend one hour exclusively listening to his story without offering platitudes or attempting to fix him.",
-                disciplineDesc: "Fifteen minutes of rigid kneeling in silence before the Crucifix. Reflect on Christ leaving heaven's comfort to enter the filthy margins of human suffering, uniting discomfort with descending love."
+                disciplineDesc: "Fifteen minutes of kneeling in silence before the Crucifix. Reflect on Christ leaving heaven's comfort to enter the filthy margins of human suffering, uniting your own small discomfort to the descending love of the One who came not to be served but to serve."
             },
             {
                 day: 8,
@@ -624,9 +701,9 @@
                 theology: `Though Lot's faith is weak and prayer driven by panic, God graciously accepts imperfect intercession to spare Zoar. St. Augustine notes God's willingness to condescend to human frailty to preserve a remnant. Christ becomes our ultimate Zoar sanctuary from divine justice.`,
                 reflection: `Fleeing destruction, Lot begged for a small place of refuge. A father's duty is securing a physical and spiritual sanctuary where faith, peace, and order can survive amidst cultural decay. Ruthlessly audit your home to ensure it is a fortress against the mob mentality of the outside world.`,
                 prayer: `“Father, in a world that is deeply hostile to faith and purity, make my home a sanctuary. Protect our physical and spiritual borders from the decay of the culture. Accept my weak, imperfect prayers, and grant us a place of unyielding peace. Amen.”`,
-                charityTitle: "The Discipline of the Intrusion",
+                charityTitle: "The Discipline of the Open Door",
                 charityDesc: "Deliberately disrupt your sanctuary: Invite an individual who is socially abrasive, deeply troubled, or lonely into your home for a formal dinner, OR financially sponsor rent/utilities for someone in crisis to the point of severe budget impact.",
-                disciplineDesc: "Fifteen minutes of rigid kneeling in silence before the Crucifix. Meditate on Christ allowing His bodily sanctuary to be violently destroyed so humanity might find eternal refuge. Surrender the idol of an undisturbed life."
+                disciplineDesc: "Fifteen minutes of kneeling in silence before the Crucifix. Meditate on Christ allowing His bodily sanctuary to be violently destroyed so humanity might find eternal refuge. Surrender the idol of an undisturbed life."
             },
             {
                 day: 9,
@@ -642,7 +719,7 @@
                 prayer: `“God Almighty, I cannot always be present to protect those I love, nor can I control the outcomes of my labor. As they go out into the world today, grant them mercy and favor. Keep them safe, guard their hearts, and give me the agonizing strength to release them completely. Amen.”`,
                 charityTitle: "The Discipline of Detachment",
                 charityDesc: "Identify a highly prized personal possession (valuable tool, favorite watch, expensive sporting gear, collection) and physically give it away to another man who would appreciate it. Sever earthly attachment completely without asking for return or mentioning value.",
-                disciplineDesc: "Fifteen minutes of rigid kneeling in silence before the Crucifix. Meditate on the Father's absolute detachment in sending the Son, surrendering His spirit into the Father's hands."
+                disciplineDesc: "Fifteen minutes of kneeling in silence before the Crucifix. Meditate on the Father's absolute detachment in sending the Son, surrendering His spirit into the Father's hands."
             },
             {
                 day: 10,
@@ -658,7 +735,7 @@
                 prayer: `“Lord, give me the piercing wisdom to see the unique gifts and severe flaws of my family members and friends. Put the right words in my mouth so that I might speak life, necessary correction, and Your divine blessing over their futures. Amen.”`,
                 charityTitle: "The Discipline of Truth in Love",
                 charityDesc: "Initiate a difficult, uncomfortable conversation with a brother, son, or close friend. Look him in the eye and call out a specific destructive sin or pattern of mediocrity in his life, followed immediately by calling out his high potential in Christ.",
-                disciplineDesc: "Fifteen minutes of rigid kneeling in silence before the Crucifix. Meditate on Christ's final words ('It is finished') and your inevitable death. Pray to die empty, having spoken every word of truth, correction, and blessing required."
+                disciplineDesc: "Fifteen minutes of kneeling in silence before the Crucifix. Meditate on Christ's final words ('It is finished') and your inevitable death. Pray to die empty, having spoken every word of truth, correction, and blessing required."
             }
         ];
 
@@ -705,7 +782,8 @@
 
         /* APPLICATION STATE */
         let state = {
-            currentDay: 1,
+            // Resume on the day you were last reading.
+            currentDay: Number(localStorage.getItem('mb_current_day')) || 1,
             completedScriptures: JSON.parse(localStorage.getItem('mb_completed_scriptures')) || [],
             completedCharities: JSON.parse(localStorage.getItem('mb_completed_charities')) || [],
             completedDisciplines: JSON.parse(localStorage.getItem('mb_completed_disciplines')) || [],
@@ -728,7 +806,104 @@
             loadJournal();
             initCharts();
             updateGlobalProgress();
+            // PWA wiring
+            updateBottomNav();
+            updateOfflineBadge();
+            updateInstallBar();
         });
+
+        /* ===== PROGRESSIVE WEB APP ==========================================
+           Installable on the home screen and usable with no signal. The
+           service worker (sw.js) caches the app itself; the journal and your
+           ticks are already saved on the device in localStorage.
+           =================================================================== */
+
+        let deferredInstallPrompt = null;
+
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js').catch(() => {});
+            });
+        }
+
+        function updateOfflineBadge() {
+            const badge = document.getElementById('offline-badge');
+            if (badge) badge.classList.toggle('show', !navigator.onLine);
+        }
+        window.addEventListener('online', updateOfflineBadge);
+        window.addEventListener('offline', updateOfflineBadge);
+
+        function isStandalone() {
+            return window.matchMedia('(display-mode: standalone)').matches ||
+                   window.navigator.standalone === true;
+        }
+
+        function updateInstallBar() {
+            const bar = document.getElementById('install-bar');
+            if (!bar) return;
+            if (isStandalone() || !deferredInstallPrompt) return;
+            if (localStorage.getItem('mb_install_dismissed') === '1') return;
+            bar.classList.add('show');
+        }
+
+        function dismissInstallBar() {
+            const bar = document.getElementById('install-bar');
+            if (bar) bar.classList.remove('show');
+            localStorage.setItem('mb_install_dismissed', '1');
+        }
+
+        window.addEventListener('beforeinstallprompt', (event) => {
+            event.preventDefault();
+            deferredInstallPrompt = event;
+            updateInstallBar();
+        });
+
+        window.addEventListener('appinstalled', () => {
+            deferredInstallPrompt = null;
+            const bar = document.getElementById('install-bar');
+            if (bar) bar.classList.remove('show');
+        });
+
+        function promptInstall() {
+            if (!deferredInstallPrompt) return;
+            deferredInstallPrompt.prompt();
+            deferredInstallPrompt.userChoice.finally(() => {
+                deferredInstallPrompt = null;
+                const bar = document.getElementById('install-bar');
+                if (bar) bar.classList.remove('show');
+            });
+        }
+
+        /* Bottom bar (phones): step through the days without scrolling back up. */
+        function updateBottomNav() {
+            const total = dayData.length;
+            const day = state.currentDay;
+            const setText = (id, txt) => {
+                const el = document.getElementById(id);
+                if (el) el.innerText = txt;
+            };
+            setText('nav-day-label', `Day ${day} of ${total}`);
+
+            const done = ['completedScriptures', 'completedCharities', 'completedDisciplines']
+                .filter(key => state[key].includes(day)).length;
+            setText('nav-progress-label', `${done} of 3 done`);
+
+            const prev = document.getElementById('nav-prev');
+            const next = document.getElementById('nav-next');
+            if (prev) prev.disabled = day <= 1;
+            if (next) next.disabled = day >= total;
+        }
+
+        function stepDay(delta) {
+            const target = state.currentDay + delta;
+            if (target < 1 || target > dayData.length) return;
+            selectDay(target);
+        }
+
+        function scrollToDayPicker() {
+            const grid = document.getElementById('day-grid');
+            if (grid) grid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
 
         /* RENDER DAY SELECTION GRID */
         function renderDayGrid() {
@@ -745,7 +920,8 @@
 
                 const btn = document.createElement('button');
                 btn.onclick = () => selectDay(d.day);
-                btn.className = `p-2.5 rounded text-left border transition-all flex flex-col justify-between h-20 ${
+                btn.setAttribute('aria-label', `Day ${d.day}: ${d.title}`);
+                btn.className = `p-1.5 sm:p-2.5 rounded text-left border transition-all flex flex-col items-center sm:items-start justify-center sm:justify-between h-14 sm:h-20 w-full ${
                     isActive 
                         ? 'bg-amber-800 text-white border-amber-900 shadow-md ring-2 ring-amber-700/30' 
                         : isCompleted
@@ -753,13 +929,15 @@
                             : 'bg-white border-stone-200 text-stone-700 hover:bg-stone-50'
                 }`;
 
+                // Phones get a compact numbered tile (5 across); wider screens get
+                // the full card with patriarch and theme.
                 btn.innerHTML = `
-                    <div class="flex items-center justify-between w-full">
-                        <span class="font-cinzel text-xs font-bold ${isActive ? 'text-amber-200' : 'text-amber-800'}">DAY ${d.day}</span>
-                        ${isCompleted ? '<span class="text-xs">✔️</span>' : ''}
+                    <div class="flex items-center justify-center sm:justify-between gap-1 w-full">
+                        <span class="font-cinzel font-bold ${isActive ? 'text-amber-200' : 'text-amber-800'}"><span class="hidden sm:inline text-xs">DAY </span><span class="text-base sm:text-xs">${d.day}</span></span>
+                        ${isCompleted ? '<span class="text-[10px] sm:text-xs">✔️</span>' : ''}
                     </div>
-                    <div class="font-semibold text-xs truncate w-full ${isActive ? 'text-white' : 'text-stone-800'}">${d.patriarch}</div>
-                    <div class="text-[10px] opacity-80 truncate w-full">${d.theme}</div>
+                    <div class="hidden sm:block font-semibold text-xs truncate w-full ${isActive ? 'text-white' : 'text-stone-800'}">${d.patriarch}</div>
+                    <div class="hidden sm:block text-[10px] opacity-80 truncate w-full">${d.theme}</div>
                 `;
                 grid.appendChild(btn);
             });
@@ -781,10 +959,19 @@
         /* SELECT DAY */
         function selectDay(dayNum) {
             state.currentDay = dayNum;
+            localStorage.setItem('mb_current_day', dayNum);
             renderDayGrid();
             renderDayContent(dayNum);
             updateCharts();
             resetTimer();
+            updateBottomNav();
+
+            // On a phone, bring the reading into view rather than leaving the
+            // reader stranded at the day buttons.
+            if (window.matchMedia('(max-width: 767px)').matches) {
+                const target = document.getElementById('devotional-display');
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
         }
 
         /* HELPER: IS DAY COMPLETE */
@@ -883,7 +1070,7 @@
                     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-amber-800/20 pb-3">
                         <div>
                             <!-- ===== EDIT: SMALL LABEL ABOVE THE DAY'S WORK-OF-MERCY TITLE ===== -->
-                            <span class="text-xs font-bold text-amber-800 uppercase tracking-wider">Demanding Practical Discipline</span>
+                            <span class="text-xs font-bold text-amber-800 uppercase tracking-wider">Concrete Work of Mercy</span>
                             <h3 class="font-cinzel font-bold text-xl text-stone-900">${data.charityTitle}</h3>
                         </div>
                         <button onclick="toggleRequirement('charity', ${data.day})" class="px-4 py-2 rounded text-xs font-semibold border transition-all ${isCharityDone ? 'bg-amber-800 text-white border-amber-900' : 'bg-white text-stone-800 border-stone-300 hover:bg-stone-50'}">
@@ -1156,6 +1343,8 @@
             const percent = (fullyCompletedCount / 10) * 100;
             document.getElementById('global-progress-bar').style.width = `${percent}%`;
             document.getElementById('global-progress-text').innerText = `${fullyCompletedCount} / 10 Days Completed`;
+            // keep the phone bottom bar in step with the ticks above
+            if (typeof updateBottomNav === 'function') updateBottomNav();
         }
 
         /* JOURNAL LOGIC */
@@ -1380,5 +1569,24 @@
             }
         }
     </script>
+    <!-- ===== MOBILE BOTTOM BAR: day navigation (phones only) ===== -->
+    <nav id="bottom-nav" class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-stone-900 text-stone-100 border-t border-stone-800 shadow-[0_-4px_12px_rgba(0,0,0,0.25)]">
+        <div class="flex items-stretch">
+            <button id="nav-prev" onclick="stepDay(-1)" aria-label="Previous day"
+                    class="flex-1 flex items-center justify-center gap-1 py-3.5 text-sm font-semibold text-stone-300 active:bg-stone-800 disabled:opacity-30">
+                <span aria-hidden="true">◀</span><span>Prev</span>
+            </button>
+            <button id="nav-today" onclick="scrollToDayPicker()" aria-label="Choose a day"
+                    class="flex-[1.6] py-2 flex flex-col items-center justify-center border-x border-stone-800 active:bg-stone-800">
+                <span id="nav-day-label" class="font-cinzel text-sm font-bold">Day 1</span>
+                <span id="nav-progress-label" class="text-[10px] text-amber-500">0 of 3 done</span>
+            </button>
+            <button id="nav-next" onclick="stepDay(1)" aria-label="Next day"
+                    class="flex-1 flex items-center justify-center gap-1 py-3.5 text-sm font-semibold text-stone-300 active:bg-stone-800 disabled:opacity-30">
+                <span>Next</span><span aria-hidden="true">▶</span>
+            </button>
+        </div>
+    </nav>
+
 </body>
 </html>

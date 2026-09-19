@@ -1,0 +1,42 @@
+{
+  "name": "The Patriarchs' Altar",
+  "short_name": "Patriarchs'",
+  "description": "A 10-day Catholic devotional through Genesis for men: patriarchal intercession, Scripture and patristic commentary, penitential practice, and works of mercy.",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#fbf9f5",
+  "theme_color": "#1c1917",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["books", "education", "lifestyle"],
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Today's reading",
+      "short_name": "Today",
+      "url": "/"
+    }
+  ]
+}

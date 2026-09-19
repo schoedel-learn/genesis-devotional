@@ -58,6 +58,24 @@ the field names tell you what each piece of text becomes:
 | `charityTitle` / `charityDesc` | the work-of-mercy card |
 | `disciplineDesc` | the concluding 15-minute kneeling prayer |
 
+## The app side (it installs and works offline)
+
+The site is a real installable app now:
+
+- **Add to home screen** — visitors on a phone see a small "Add to your home screen" bar. They tap Install once and it opens full-screen with no browser chrome, like a native app. The bar hides itself once installed, and the ✕ dismisses it for good.
+- **Works with no signal** — a service worker (`sw.js`) saves the whole app the first time it is opened. After that, readings, the prayers, the 15-minute timer, the day buttons and the journal all work offline. Your progress is stored on the device either way.
+- **Remembers where you were** — reopening the app returns you to the last day you were reading.
+- **Bottom bar on phones** — Prev / Next and a "Day 3 of 10 · 1 of 3 done" readout sit fixed at the bottom, so you can move between days without scrolling back up.
+
+**If you change the readings and want the offline copy refreshed:** open `sw.js` and change
+
+    const CACHE_VERSION = 'v2';
+
+to `'v3'` (or any new value). That tells every installed copy to download the
+new version instead of serving the old one. You do **not** need to do this for
+ordinary edits — only when you want phones that already installed the app to
+pick up the change.
+
 ## Five rules so you don't break the page
 
 1. **Keep the quotes and backticks.** Day text is wrapped in backticks and labels
@@ -76,7 +94,10 @@ the field names tell you what each piece of text becomes:
 | `index.html` | the entire site — the one you edit |
 | `firebase.json` | deploy settings: ignore list, no-cache header, old-URL redirect |
 | `firestore.rules` | who may read/write each user's saved progress |
-| `favicon.png`, `apple-touch-icon.png` | tab and home-screen icon |
+| `manifest.webmanifest` | makes the app installable: its name, colours, icons |
+| `sw.js` | the offline service worker (see "The app side" above) |
+| `icon-192.png`, `icon-512.png`, `icon-maskable-512.png` | home-screen app icons |
+| `favicon.png`, `apple-touch-icon.png` | tab and iPhone home-screen icon |
 | `og-card.png` | the image shown in link previews |
 | `preview.sh`, `deploy.sh` | preview and publish |
 | `SETUP_GUIDE.md` | original Firebase setup notes (historical reference) |
