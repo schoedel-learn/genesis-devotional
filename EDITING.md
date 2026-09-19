@@ -12,6 +12,17 @@ to change.
 After deploying, hard-refresh your browser with **Ctrl+Shift+R** — otherwise you
 may keep seeing the old page from cache.
 
+### Seeing the phone layout while you edit
+
+- **On this computer** (easiest): with the preview running, press **F12** then
+  **Ctrl+Shift+M** in Chrome. That gives you a phone-shaped viewport with a device
+  picker. Everything adapts — the 5-across day tiles, the bottom bar.
+- **On your actual phone**: `./preview.sh --lan` and open the address it prints
+  (something like `http://192.168.1.243:8099`) on your phone, same Wi-Fi. That
+  shows the **layout only** — the install prompt and offline mode need `https`,
+  so test those on the live site. Plain `./preview.sh` stays on this computer,
+  which is safer since it keeps the project folder off the network.
+
 ## What to change, and what to search for
 
 | I want to change… | Search for |
