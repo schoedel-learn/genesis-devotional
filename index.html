@@ -87,7 +87,7 @@
         - Exegetical Context (Hebrew lexicon e.g., nābîʾ, yārēʾ, ṣāḥaq; ANE context).
         - Patristic Commentary & Christological Typology (Chrysostom, Augustine, Ambrose, Origen).
         - A Man's Reflection & Prescribed Intercessory Prayer with personal intentions field.
-        - Uncomfortable Act of Charity (Physical, social, or emotional mortification challenge).
+        - Uncomfortable Act of Charity (a demanding penitential work touching the body, social comfort, or pride).
         - Concluding 15-Minute Rigid Kneeling Timer (with Web Audio chime cue & posture adaptations).
         - Interactive Mandatory Concluding Devotional Prayers Accordion (Our Father, 3x Hail Mary, Glory Be, St. Michael, Liberation Prayer).
      5. Theological Analytics & Scriptural Matrices:
@@ -95,10 +95,10 @@
         - Chart 2: Rule of Life Completion Analytics Doughnut Chart.
         - Interactive Comparative Matrices: Genesis 32 Survival Strategies and Genesis 18 vs 19 Comparison.
      6. LocalStorage Journal & Rule of Life Tracker.
-     WHY THIS STRUCTURE: Unifies deep Catholic manuscript exegesis with actionable daily ascetical practice. Incorporates the exact prayers and structure specified in the refined guide.
+     WHY THIS STRUCTURE: Unifies deep Catholic manuscript exegesis with actionable daily penitential practice. Incorporates the exact prayers and structure specified in the refined guide.
 -->
 <!-- Visualization & Content Choices:
-     - Radar Chart (Chart.js): Maps four ascetical dimensions (Selfless Humility, Physical Strain, Prophetic Courage, Social Friction).
+     - Radar Chart (Chart.js): Maps four intercessory dimensions (Selfless Humility, Penitential Labor, Prophetic Courage, Social Friction).
      - Doughnut Chart (Chart.js): Displays completion percentage across 30 total tasks (10 days x 3 requirements).
      - Interactive HTML Canvas Ring Timer with Web Audio Chime: Silent countdown timer for 15-min rigid kneeling.
      - Structured HTML Tables: Genesis 32 and Genesis 18/19 comparative matrices (No SVG/Mermaid used).
@@ -180,7 +180,7 @@
                     Catholic Men as Intercessors Through Genesis
                 </h2>
                 <p class="font-serif text-stone-700 text-base sm:text-lg leading-relaxed">
-                    The Book of Genesis establishes the theological paradigm for patriarchal priesthood, sacrifice, and right worship. Modern masculine spirituality frequently suffers from a dual crisis of stoic passivity and the idolatry of comfort. To counter this spiritual lethargy, this guide provides a rigorous ascetical curriculum.
+                    The Book of Genesis establishes the theological paradigm for patriarchal priesthood, sacrifice, and right worship. Modern masculine spirituality frequently suffers from a dual crisis of stoic passivity and the idolatry of comfort. To counter this spiritual lethargy, this guide calls men to a deeper conversion to Christ — to repent and believe the Gospel — and to the penitential and reparative works that genuine repentance brings forth.
                 </p>
                 
                 <!-- Ignatian Novena Explanation Box -->
@@ -202,7 +202,7 @@
                     </div>
                     <div class="p-3 bg-stone-50 rounded border border-stone-200">
                         <div class="font-cinzel text-xl font-bold text-amber-800">150 Mins</div>
-                        <div class="text-xs text-stone-600">Silent Kneeling Mortification</div>
+                        <div class="text-xs text-stone-600">Silent Penitential Kneeling</div>
                     </div>
                     <div class="p-3 bg-stone-50 rounded border border-stone-200">
                         <div class="font-cinzel text-xl font-bold text-amber-800">DRA Vulgate</div>
@@ -217,7 +217,7 @@
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-stone-200 pb-3">
                 <div>
                     <h3 class="font-cinzel font-bold text-xl text-stone-900">Curriculum Day Selection</h3>
-                    <p class="text-xs text-stone-600">Filter by Patriarch or select a day to load biblical exegesis, patristic typology, and physical disciplines.</p>
+                    <p class="text-xs text-stone-600">Filter by Patriarch or select a day to load biblical exegesis, patristic typology, and the day's penitential works.</p>
                 </div>
                 <!-- Filter Buttons -->
                 <div class="flex flex-wrap gap-2 text-xs" id="patriarch-filters">
@@ -251,14 +251,14 @@
                 <!-- CHART 1: PATRIARCHAL INTERCESSION RADAR -->
                 <div class="bg-white p-6 rounded-lg border border-stone-200 shadow-sm flex flex-col justify-between">
                     <div>
-                        <h4 class="font-cinzel font-bold text-lg text-stone-900 mb-1">Ascetical & Intercessory Dynamics</h4>
+                        <h4 class="font-cinzel font-bold text-lg text-stone-900 mb-1">Penitential & Intercessory Dynamics</h4>
                         <p class="text-xs text-stone-600 mb-4">Quantifying core spiritual forces in patriarchal intercession across four distinct axes.</p>
                     </div>
                     <div class="chart-container">
                         <canvas id="intercessionRadarChart"></canvas>
                     </div>
                     <div class="mt-4 text-xs text-stone-500 bg-stone-50 p-3 rounded border border-stone-200">
-                        <strong class="text-stone-800">Insight:</strong> Patriarchal intercession directly bridges intense personal humility and physical discomfort with elevated Christological typology.
+                        <strong class="text-stone-800">Insight:</strong> Patriarchal intercession directly bridges intense personal humility and penitential labor with elevated Christological typology.
                     </div>
                 </div>
 
@@ -374,10 +374,10 @@
                     <textarea id="journal-intentions" class="w-full h-36 bg-stone-800 border border-stone-700 rounded p-3 text-stone-200 text-sm focus:border-amber-700 focus:outline-none custom-scrollbar" placeholder="List specific individuals you are standing in the breach for today (e.g., spouse, family members, rivals, community leaders)..."></textarea>
                 </div>
 
-                <!-- Personal Mortification & Experience Notes -->
+                <!-- Personal Penance & Experience Notes -->
                 <div class="space-y-2">
-                    <label class="block font-cinzel text-sm font-semibold text-amber-500">2. Mortification & Kneeling Reflection Notes</label>
-                    <textarea id="journal-reflections" class="w-full h-36 bg-stone-800 border border-stone-700 rounded p-3 text-stone-200 text-sm focus:border-amber-700 focus:outline-none custom-scrollbar" placeholder="Record physical struggles during the 15-min rigid kneeling, insights gained during the act of charity, or internal friction..."></textarea>
+                    <label class="block font-cinzel text-sm font-semibold text-amber-500">2. Penitential & Kneeling Reflection Notes</label>
+                    <textarea id="journal-reflections" class="w-full h-36 bg-stone-800 border border-stone-700 rounded p-3 text-stone-200 text-sm focus:border-amber-700 focus:outline-none custom-scrollbar" placeholder="Record the burdens you carried into the 15-min kneeling, insights gained during the act of charity, or interior resistance you encountered..."></textarea>
                 </div>
             </div>
 
@@ -392,7 +392,7 @@
     <!-- FOOTER -->
     <footer class="bg-stone-900 text-stone-400 border-t border-stone-800 py-8 mt-12 text-center text-xs space-y-2">
         <div class="max-w-7xl mx-auto px-4">
-            <p class="font-cinzel text-stone-300 font-semibold text-sm">A Theological & Ascetical Framework for Masculine Intercession</p>
+            <p class="font-cinzel text-stone-300 font-semibold text-sm">A Theological & Scriptural Framework for Masculine Intercession</p>
             <p>Scriptures drawn strictly from the Douay-Rheims 1899 American Edition (DRA) Latin Vulgate translation.</p>
             <p class="text-stone-500 pt-2">Structured on the Catholic Novena + St. Ignatius "+1" Rule in the Spiritual Exercises.</p>
         </div>
@@ -437,7 +437,7 @@
                 patriarch: "Abraham",
                 passageRef: "Genesis 18:23-26",
                 theme: "Intercession",
-                radarScores: [9, 8, 9, 8], // Humility, Physical Strain, Prophetic Courage, Social Friction
+                radarScores: [9, 8, 9, 8], // Humility, Penitential Labor, Prophetic Courage, Social Friction
                 scripture: `"And drawing nigh, he said: Wilt thou destroy the just with the wicked? If there be fifty just men in the city, shall they perish withal? and wilt thou not spare that place for the sake of the fifty just, if they be therein? Far be it from thee to do this thing, and to slay the just with the wicked, and for the just to be in like case as the wicked, this is not beseeming thee: thou who judgest all the earth, wilt not make this judgment. And the Lord said to him: If I find in Sodom fifty just within the city, I will spare the whole place for their sake." (Genesis 18:23-26)`,
                 context: `The narrative unfolds during the oppressive heat of the midday sun at the oaks of Mamre. Abraham, resting at the entrance of his tent, is visited by three divine travelers. Ancient Near Eastern (ANE) hospitality norms dictated a swift response, which Abraham exceeds by providing curds, milk, and a freshly prepared, tender calf. Following this meal, Yahweh reveals the impending doom of Sodom and Gomorrah, citing that the outcry against them is "great" and their sin "very grave". Down in that valley of wickedness resides Lot, Abraham's flesh and blood. Abraham then initiates a breathless, high-stakes legal negotiation with the Creator, asking: "thou who judgest all the earth, wilt not make this judgment". He systematically cross-examines divine justice, negotiating the required righteous men from fifty down to ten.`,
                 theology: `Patristic commentators, such as St. John Chrysostom, marvel at Abraham’s audacity, noting that he adds petition to petition without ceasing, utilizing his relational capital with God entirely for the sake of a condemned city. Abraham’s intercession is an act of profound spiritual sacrifice. He serves as an early type of Christ, the true High Priest who stands in the breach between divine justice and human rebellion, interceding for a world facing destruction. Right worship is demonstrated here not as isolated piety, but as stepping outside personal comfort to advocate for the lost.`,
@@ -824,15 +824,15 @@
                     </p>
                 </div>
 
-                <!-- CONCLUDING ASCETICAL DISCIPLINE, TIMER, & ACCORDION PRAYERS -->
+                <!-- CONCLUDING PENITENTIAL DISCIPLINE, TIMER, & ACCORDION PRAYERS -->
                 <div class="bg-stone-900 text-stone-100 p-6 sm:p-8 rounded-lg border border-stone-800 space-y-6">
                     <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-stone-800 pb-4">
                         <div>
-                            <span class="text-xs font-bold text-amber-500 uppercase tracking-widest">Daily Concluding Mortification</span>
+                            <span class="text-xs font-bold text-amber-500 uppercase tracking-widest">Daily Concluding Penance</span>
                             <h3 class="font-cinzel font-bold text-xl text-stone-100">15-Minute Rigid Kneeling Silence</h3>
                         </div>
                         <button onclick="toggleRequirement('discipline', ${data.day})" class="px-4 py-2 rounded text-xs font-semibold border transition-all ${isDisciplineDone ? 'bg-amber-700 text-white border-amber-800' : 'bg-stone-800 text-stone-300 border-stone-700 hover:bg-stone-700'}">
-                            ${isDisciplineDone ? '✓ Mortification Marked Complete' : 'Mark Discipline Complete'}
+                            ${isDisciplineDone ? '✓ Penitential Work Marked Complete' : 'Mark Discipline Complete'}
                         </button>
                     </div>
 
@@ -916,7 +916,7 @@
                         clearInterval(state.timerInterval);
                         state.timerRunning = false;
                         playChime();
-                        alert("15-Minute Silent Kneeling Prayer Completed. Unify your mortification with the Passion of Christ.");
+                        alert("15-Minute Silent Kneeling Prayer Completed. Unify this penance with the Passion of Christ.");
                         toggleRequirement('discipline', state.currentDay);
                     }
                 }, 1000);
@@ -1219,7 +1219,7 @@
             radarChartInstance = new Chart(radarCtx, {
                 type: 'radar',
                 data: {
-                    labels: ['Selfless Humility', 'Physical Strain', 'Prophetic Courage', 'Social Friction'],
+                    labels: ['Selfless Humility', 'Penitential Labor', 'Prophetic Courage', 'Social Friction'],
                     datasets: [{
                         label: `Day ${currentDayObj.day}: ${currentDayObj.title}`,
                         data: currentDayObj.radarScores,
@@ -1264,7 +1264,7 @@
             progressChartInstance = new Chart(progressCtx, {
                 type: 'doughnut',
                 data: {
-                    labels: ['Scriptures Read', 'Charities Done', 'Mortifications Done', 'Remaining Requirements'],
+                    labels: ['Scriptures Read', 'Charities Done', 'Penitential Works Done', 'Remaining Requirements'],
                     datasets: [{
                         data: calculateProgressDataset(),
                         backgroundColor: ['#b45309', '#92400e', '#78350f', '#e7e5e4'],
