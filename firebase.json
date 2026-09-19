@@ -7,9 +7,38 @@
     "ignore": [
       "firebase.json",
       "firestore.rules",
+      "firebase-debug.log",
+      "firestore-debug.log",
       "README.md",
       "SETUP_GUIDE.md",
-      "**/.*"
+      "EDITING.md",
+      "preview.sh",
+      "deploy.sh",
+      "**/.*",
+      "**/.*/**",
+      "**/node_modules/**",
+      "**/*.log"
+    ],
+    "headers": [
+      {
+        "source": "/",
+        "headers": [
+          { "key": "Cache-Control", "value": "no-cache, must-revalidate" }
+        ]
+      },
+      {
+        "source": "/index.html",
+        "headers": [
+          { "key": "Cache-Control", "value": "no-cache, must-revalidate" }
+        ]
+      }
+    ],
+    "redirects": [
+      {
+        "source": "/genesis_devotional_guide.html",
+        "destination": "/",
+        "type": 301
+      }
     ]
   }
 }

@@ -1,9 +1,52 @@
 <!DOCTYPE html>
+<!--
+  ============================================================================
+   THE PATRIARCHS' ALTAR  -  this entire site is THIS ONE FILE (index.html)
+  ============================================================================
+   TO CHANGE ANY WORDING: search for the marker  ===== EDIT:
+   Every editable block is labelled with one. Jump between them with
+   Ctrl+F, or search for these key anchors:
+
+     ===== EDIT:   ............ all editable wording (titles, headings,
+                                paragraphs, buttons, labels)
+     title>        ............ the browser-tab + Google result text
+     dayData       ............ all 10 days of daily content (the big block)
+     mandatoryPrayersHTML ..... the concluding prayers that appear each day
+     labels:       ............ chart axis + legend wording
+
+   TO PREVIEW ON YOUR OWN MACHINE:   ./preview.sh
+   TO PUBLISH:                       ./deploy.sh
+   FULL GUIDE:                       EDITING.md
+  ============================================================================
+-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Patriarchs' Altar: Catholic Practices to Strengthen Patriarchs</title>
+
+    <!-- ===== EDIT: PAGE TITLE & LINK PREVIEW =====================================
+         The <title> above is the browser-tab / Google-result text.
+         The <meta> tags below are what shows when the link is pasted into
+         WhatsApp, iMessage, Facebook, Slack, LinkedIn, or X.
+         If you change the title or description, change BOTH places.
+         ========================================================================== -->
+    <meta name="description" content="A 10-day Catholic devotional through Genesis for men: patriarchal intercession, Scripture and patristic commentary, penitential practice, and works of mercy.">
+    <link rel="canonical" href="https://genesis.catholic.work/">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="The Patriarchs' Altar">
+    <meta property="og:title" content="The Patriarchs' Altar: Catholic Practices to Strengthen Patriarchs">
+    <meta property="og:description" content="A 10-day Catholic devotional through Genesis for men: patriarchal intercession, Scripture and patristic commentary, penitential practice, and works of mercy.">
+    <meta property="og:url" content="https://genesis.catholic.work/">
+    <meta property="og:image" content="https://genesis.catholic.work/og-card.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="The Patriarchs' Altar: Catholic Practices to Strengthen Patriarchs">
+    <meta name="twitter:description" content="A 10-day Catholic devotional through Genesis for men: patriarchal intercession, Scripture and patristic commentary, penitential practice, and works of mercy.">
+    <meta name="twitter:image" content="https://genesis.catholic.work/og-card.png">
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Chart.js -->
@@ -113,6 +156,7 @@
             <div class="flex items-center space-x-3">
                 <span class="text-2xl text-amber-700">✝</span>
                 <div>
+                    <!-- ===== EDIT: SITE TITLE + SUBTITLE (top-left header) ===== -->
                     <h1 class="font-cinzel font-bold text-lg sm:text-xl tracking-wider text-stone-100">THE PATRIARCHS' ALTAR</h1>
                     <p class="text-xs text-stone-400 hidden sm:block">Catholic Practices to Strengthen Patriarchs</p>
                 </div>
@@ -176,6 +220,7 @@
                         ✝ Ignatian "+1" Novena Framework
                     </span>
                 </div>
+                <!-- ===== EDIT: MAIN HEADING + INTRO PARAGRAPH ===== -->
                 <h2 class="font-cinzel text-2xl sm:text-3xl md:text-4xl font-bold text-stone-900 leading-tight">
                     Catholic Men as Intercessors Through Genesis
                 </h2>
@@ -185,12 +230,14 @@
                 
                 <!-- Ignatian Novena Explanation Box -->
                 <div class="bg-stone-50 border-l-4 border-amber-800 p-4 rounded-r text-xs sm:text-sm text-stone-700 space-y-1">
+                    <!-- ===== EDIT: NOVENA EXPLANATION BOX ===== -->
                     <div class="font-cinzel font-bold text-amber-900 uppercase tracking-wider">The 10-Day Ignatian Novena Rule</div>
                     <p>
                         This curriculum is anchored in the traditional Catholic Novena (9 days of prayer). However, following the spiritual counsel of <strong>St. Ignatius of Loyola</strong> in the <em>Spiritual Exercises</em>—who recommends adding a small amount to a spiritual exercise to overcome the desire to cut it short—this framework extends to <strong>10 days</strong>. This final day breaks the male tendency toward premature spiritual compromise.
                     </p>
                 </div>
 
+                <!-- ===== EDIT: THE FOUR SUMMARY CARDS (10 Days / 10 Acts / 150 Mins / DRA Vulgate) ===== -->
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-2 text-center">
                     <div class="p-3 bg-stone-50 rounded border border-stone-200">
                         <div class="font-cinzel text-xl font-bold text-amber-800">10 Days</div>
@@ -216,6 +263,7 @@
         <section class="space-y-4">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-stone-200 pb-3">
                 <div>
+                    <!-- ===== EDIT: DAY-SELECTOR HEADING + SUBTITLE ===== -->
                     <h3 class="font-cinzel font-bold text-xl text-stone-900">Curriculum Day Selection</h3>
                     <p class="text-xs text-stone-600">Filter by Patriarch or select a day to load biblical exegesis, patristic typology, and the day's penitential works.</p>
                 </div>
@@ -243,6 +291,7 @@
         <!-- COMPARATIVE MATRIX & ANALYTICS SECTION -->
         <section class="space-y-6">
             <div class="border-b border-stone-200 pb-2">
+                <!-- ===== EDIT: CHART-SECTION HEADING + SUBTITLE (and the two card titles below) ===== -->
                 <h3 class="font-cinzel font-bold text-2xl text-stone-900">Patriarchal Intercession & Theological Structure</h3>
                 <p class="text-sm text-stone-600">Analytical breakdown of intercessory dimensions, scriptural comparison matrices, and overall spiritual habit metrics.</p>
             </div>
@@ -359,6 +408,7 @@
         <section class="bg-stone-900 text-stone-100 p-6 sm:p-8 rounded-lg shadow-lg border border-amber-800 space-y-6">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-stone-800 pb-4">
                 <div>
+                    <!-- ===== EDIT: JOURNAL HEADING + SUBTITLE (the two field labels are just below) ===== -->
                     <h3 class="font-cinzel font-bold text-2xl text-stone-100">Patriarchal Intercessory Journal</h3>
                     <p class="text-xs text-stone-400">Record localized intercessions, family burdens, and physical reflections for your spiritual rule of life.</p>
                 </div>
@@ -392,6 +442,7 @@
     <!-- FOOTER -->
     <footer class="bg-stone-900 text-stone-400 border-t border-stone-800 py-8 mt-12 text-center text-xs space-y-2">
         <div class="max-w-7xl mx-auto px-4">
+            <!-- ===== EDIT: FOOTER LINES (bottom of every page) ===== -->
             <p class="font-cinzel text-stone-300 font-semibold text-sm">A Theological & Scriptural Framework for Masculine Intercession</p>
             <p>Scriptures drawn strictly from the Douay-Rheims 1899 American Edition (DRA) Latin Vulgate translation.</p>
             <p class="text-stone-500 pt-2">Structured on the Catholic Novena + St. Ignatius "+1" Rule in the Spiritual Exercises.</p>
@@ -430,6 +481,24 @@
     <!-- JAVASCRIPT LOGIC -->
     <script>
         /* FULL DATABASE FOR THE 10 DAYS DRAWN FROM REFINED MANUSCRIPT */
+        /* ===== EDIT: ALL 10 DAYS OF DAILY CONTENT =============================
+           Each block below is ONE DAY. The fields, in order:
+             day             number shown on the day button
+             title           the day's heading
+             patriarch       which filter it belongs to: Abraham / Isaac / Jacob / Lot / Servant
+             passageRef      scripture citation shown under the heading
+             theme           one-word tag
+             radarScores     [Humility, Penitential Labor, Prophetic Courage, Social Friction], 1-10
+             scripture       the quoted passage (Douay-Rheims)
+             context         "Biblical & Historical Context" paragraph
+             theology        "Theological Significance & Typology" paragraph
+             reflection      "A Man's Reflection" paragraph
+             prayer          "Prescribed Intercessory Prayer"
+             charityTitle    heading of the work-of-mercy card
+             charityDesc     the work of mercy itself
+             disciplineDesc  the concluding 15-minute kneeling prayer
+           Keep the backticks (`) and the quote marks around each value intact.
+           ==================================================================== */
         const dayData = [
             {
                 day: 1,
@@ -594,6 +663,7 @@
         ];
 
         /* MANDATORY DEVOTIONAL CONCLUDING PRAYERS TEXT */
+        /* ===== EDIT: CONCLUDING PRAYERS (the accordion shown at the bottom of every day) ===== */
         const mandatoryPrayersHTML = `
             <div class="mt-6 border-t border-stone-800 pt-4 space-y-3 text-stone-300 text-xs sm:text-sm">
                 <div class="flex items-center justify-between cursor-pointer bg-stone-950 p-3 rounded border border-stone-800 hover:border-amber-700 transition-colors" onclick="togglePrayersAccordion()">
@@ -812,6 +882,7 @@
                 <div class="bg-amber-900/5 p-6 rounded-lg border border-amber-800/30 space-y-4">
                     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-amber-800/20 pb-3">
                         <div>
+                            <!-- ===== EDIT: SMALL LABEL ABOVE THE DAY'S WORK-OF-MERCY TITLE ===== -->
                             <span class="text-xs font-bold text-amber-800 uppercase tracking-wider">Demanding Practical Discipline</span>
                             <h3 class="font-cinzel font-bold text-xl text-stone-900">${data.charityTitle}</h3>
                         </div>
@@ -916,6 +987,7 @@
                         clearInterval(state.timerInterval);
                         state.timerRunning = false;
                         playChime();
+                        // ===== EDIT: MESSAGE SHOWN WHEN THE 15-MINUTE TIMER FINISHES =====
                         alert("15-Minute Silent Kneeling Prayer Completed. Unify this penance with the Passion of Christ.");
                         toggleRequirement('discipline', state.currentDay);
                     }
@@ -1219,6 +1291,7 @@
             radarChartInstance = new Chart(radarCtx, {
                 type: 'radar',
                 data: {
+                    // ===== EDIT: RADAR CHART AXIS LABELS (the four spokes) =====
                     labels: ['Selfless Humility', 'Penitential Labor', 'Prophetic Courage', 'Social Friction'],
                     datasets: [{
                         label: `Day ${currentDayObj.day}: ${currentDayObj.title}`,
@@ -1264,6 +1337,7 @@
             progressChartInstance = new Chart(progressCtx, {
                 type: 'doughnut',
                 data: {
+                    // ===== EDIT: PROGRESS-CHART LEGEND LABELS =====
                     labels: ['Scriptures Read', 'Charities Done', 'Penitential Works Done', 'Remaining Requirements'],
                     datasets: [{
                         data: calculateProgressDataset(),
