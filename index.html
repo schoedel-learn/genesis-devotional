@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>In the Breach: A 10-Day Masculine Devotional Guide Through Genesis</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        parchment: '#fbf9f5',
+                        stone: {
+                            50: '#fafaf9',
+                            100: '#f5f5f4',
+                            200: '#e7e5e4',
+                            300: '#d6d3d1',
+                            700: '#44403c',
+                            800: '#292524',
+                            900: '#1c1917',
+                        },
+                        amber: {
+                            700: '#b45309',
+                            800: '#92400e',
+                            900: '#78350f',
+                        },
+                        crimson: {
+                            800: '#991b1b',
+                            900: '#7f1d1d',
+                        }
+                    },
+                    fontFamily: {
+                        cinzel: ['Cinzel', 'serif'],
+                        serif: ['Newsreader', 'Georgia', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 360px;
+            }
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f5f5f4;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #d6d3d1;
+            border-radius: 3px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #a8a29e;
+        }
+    </style>
+</head>
+<!-- Chosen Palette: Warm Monastic Neutrals & Deep Amber - Parchment (#fbf9f5), Stone (#f5f5f4 / #44403c / #1c1917), Deep Amber (#b45309), Crimson Accent (#991b1b) -->
+<!-- Application Structure Plan:
+     1. Navigation Bar: Displays title, Ignatian +1 Novena badge, and global curriculum progress tracker.
+     2. Hero & Ignatian Novena Primer: Explains the theological basis for patriarchal priesthood, spiritual combat, and St. Ignatius's "Plus One" rule extending the 9-day Novena to 10 days to overcome spiritual lethargy.
+     3. Curriculum Interactive Grid & Filters: Allows filtering by Patriarch (Abraham, Isaac, Jacob, Servant/Lot) and selecting any day to dynamically populate scripture exegesis, patristic commentary, and physical disciplines.
+     4. Dynamic Daily Devotional Reader:
+        - Sacred Scripture Exegesis (Douay-Rheims 1899 American Edition - DRA Vulgate).
+        - Exegetical Context (Hebrew lexicon e.g., nābîʾ, yārēʾ, ṣāḥaq; ANE context).
+        - Patristic Commentary & Christological Typology (Chrysostom, Augustine, Ambrose, Origen).
+        - A Man's Reflection & Prescribed Intercessory Prayer with personal intentions field.
+        - Uncomfortable Act of Charity (Physical, social, or emotional mortification challenge).
+        - Concluding 15-Minute Rigid Kneeling Timer (with Web Audio chime cue & posture adaptations).
+        - Interactive Mandatory Concluding Devotional Prayers Accordion (Our Father, 3x Hail Mary, Glory Be, St. Michael, Liberation Prayer).
+     5. Theological Analytics & Scriptural Matrices:
+        - Chart 1: Patriarchal Intercession Profile Radar Chart.
+        - Chart 2: Rule of Life Completion Analytics Doughnut Chart.
+        - Interactive Comparative Matrices: Genesis 32 Survival Strategies and Genesis 18 vs 19 Comparison.
+     6. LocalStorage Journal & Rule of Life Tracker.
+     WHY THIS STRUCTURE: Unifies deep Catholic manuscript exegesis with actionable daily ascetical practice. Incorporates the exact prayers and structure specified in the refined guide.
+-->
+<!-- Visualization & Content Choices:
+     - Radar Chart (Chart.js): Maps four ascetical dimensions (Selfless Humility, Physical Strain, Prophetic Courage, Social Friction).
+     - Doughnut Chart (Chart.js): Displays completion percentage across 30 total tasks (10 days x 3 requirements).
+     - Interactive HTML Canvas Ring Timer with Web Audio Chime: Silent countdown timer for 15-min rigid kneeling.
+     - Structured HTML Tables: Genesis 32 and Genesis 18/19 comparative matrices (No SVG/Mermaid used).
+-->
+<!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+<body class="bg-parchment text-stone-800 font-sans antialiased min-h-screen flex flex-col selection:bg-amber-700 selection:text-white">
+
+    <!-- TOP NAVIGATION BAR -->
+    <header class="bg-stone-900 text-stone-100 border-b-2 border-amber-700 sticky top-0 z-50 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <span class="text-2xl text-amber-700">✝</span>
+                <div>
+                    <h1 class="font-cinzel font-bold text-lg sm:text-xl tracking-wider text-stone-100">IN THE BREACH</h1>
+                    <p class="text-xs text-stone-400 hidden sm:block">A 10-Day Masculine Devotional Guide Through Genesis (DRA)</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center space-x-3 sm:space-x-5">
+                <div class="text-right hidden md:block">
+                    <div class="text-xs text-stone-400">Curriculum Progress</div>
+                    <div class="text-sm font-semibold text-amber-500" id="global-progress-text">0 / 10 Days Completed</div>
+                </div>
+                <div class="w-20 sm:w-28 bg-stone-800 h-2.5 rounded-full overflow-hidden border border-stone-700 hidden sm:block">
+                    <div id="global-progress-bar" class="bg-amber-700 h-full transition-all duration-500 w-0"></div>
+                </div>
+
+                <!-- Google Auth UI Container -->
+                <div id="auth-container" class="flex items-center pl-2 sm:pl-3 border-l border-stone-800">
+                    <!-- Logged Out Button -->
+                    <button id="btn-google-login" onclick="handleGoogleLogin()" class="flex items-center space-x-2 bg-stone-800 hover:bg-stone-700 text-stone-100 border border-stone-700 hover:border-amber-700/60 px-3 py-1.5 rounded text-xs font-semibold transition-all shadow-sm">
+                        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24">
+                            <path fill="#EA4335" d="M12 5c1.6 0 3 .6 4.1 1.6l3.1-3.1C17.3 1.7 14.8 1 12 1 7.5 1 3.7 3.6 1.9 7.3l3.7 2.9C6.5 7.4 9 5 12 5z"/>
+                            <path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.7-.2-2.3H12v4.6h6.5c-.3 1.5-1.1 2.8-2.4 3.7l3.7 2.9c2.2-2 3.7-5 3.7-8.9z"/>
+                            <path fill="#FBBC05" d="M5.6 14.8c-.2-.7-.4-1.5-.4-2.3 0-.8.2-1.6.4-2.3L1.9 7.3C.7 9.7 0 12 0 12s.7 2.3 1.9 4.7l3.7-2.9z"/>
+                            <path fill="#34A853" d="M12 23c3.2 0 6-1.1 8-3l-3.7-2.9c-1.1.7-2.5 1.2-4.3 1.2-3 0-5.5-2-6.4-4.8L1.9 16.4C3.7 20.1 7.5 23 12 23z"/>
+                        </svg>
+                        <span class="hidden sm:inline">Sign In with Google</span>
+                        <span class="sm:hidden">Sign In</span>
+                    </button>
+
+                    <!-- Logged In Profile UI -->
+                    <div id="user-profile-menu" class="hidden flex items-center space-x-3">
+                        <div class="flex items-center space-x-2">
+                            <img id="user-avatar" class="w-7 h-7 rounded-full border border-amber-600 object-cover bg-stone-700" src="" alt="Avatar" />
+                            <div class="hidden lg:block text-left leading-tight">
+                                <div id="user-display-name" class="text-xs font-semibold text-stone-200 truncate max-w-[130px]">User</div>
+                                <div id="user-sync-status" class="text-[10px] text-emerald-400 font-mono flex items-center gap-1">
+                                    <span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Synced
+                                </div>
+                            </div>
+                        </div>
+                        <button onclick="handleSignOut()" title="Sign out of account" class="text-[11px] bg-stone-800 hover:bg-stone-700 text-stone-300 hover:text-white px-2.5 py-1 rounded border border-stone-700 transition">
+                            Sign Out
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
+
+        <!-- INTRODUCTORY HERO / IGNATIAN NOVENA PRIMER -->
+        <section class="bg-white rounded-lg border border-stone-200 p-6 sm:p-8 shadow-sm relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-amber-700/5 rounded-bl-full pointer-events-none"></div>
+            <div class="max-w-4xl space-y-4">
+                <div class="flex flex-wrap items-center gap-2">
+                    <span class="bg-stone-100 px-3 py-1 rounded-full text-xs font-semibold text-stone-700 border border-stone-200">
+                        📜 Douay-Rheims 1899 American Edition (DRA)
+                    </span>
+                    <span class="bg-amber-900/10 text-amber-900 px-3 py-1 rounded-full text-xs font-semibold border border-amber-800/20">
+                        ✝ Ignatian "+1" Novena Framework
+                    </span>
+                </div>
+                <h2 class="font-cinzel text-2xl sm:text-3xl md:text-4xl font-bold text-stone-900 leading-tight">
+                    Catholic Men as Intercessors Through Genesis
+                </h2>
+                <p class="font-serif text-stone-700 text-base sm:text-lg leading-relaxed">
+                    The Book of Genesis establishes the theological paradigm for patriarchal priesthood, sacrifice, and right worship. Modern masculine spirituality frequently suffers from a dual crisis of stoic passivity and the idolatry of comfort. To counter this spiritual lethargy, this guide provides a rigorous ascetical curriculum.
+                </p>
+                
+                <!-- Ignatian Novena Explanation Box -->
+                <div class="bg-stone-50 border-l-4 border-amber-800 p-4 rounded-r text-xs sm:text-sm text-stone-700 space-y-1">
+                    <div class="font-cinzel font-bold text-amber-900 uppercase tracking-wider">The 10-Day Ignatian Novena Rule</div>
+                    <p>
+                        This curriculum is anchored in the traditional Catholic Novena (9 days of prayer). However, following the spiritual counsel of <strong>St. Ignatius of Loyola</strong> in the <em>Spiritual Exercises</em>—who recommends adding a small amount to a spiritual exercise to overcome the desire to cut it short—this framework extends to <strong>10 days</strong>. This final day breaks the male tendency toward premature spiritual compromise.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-2 text-center">
+                    <div class="p-3 bg-stone-50 rounded border border-stone-200">
+                        <div class="font-cinzel text-xl font-bold text-amber-800">10 Days</div>
+                        <div class="text-xs text-stone-600">Patriarchal Encounters</div>
+                    </div>
+                    <div class="p-3 bg-stone-50 rounded border border-stone-200">
+                        <div class="font-cinzel text-xl font-bold text-amber-800">10 Acts</div>
+                        <div class="text-xs text-stone-600">Discomforting Charity</div>
+                    </div>
+                    <div class="p-3 bg-stone-50 rounded border border-stone-200">
+                        <div class="font-cinzel text-xl font-bold text-amber-800">150 Mins</div>
+                        <div class="text-xs text-stone-600">Silent Kneeling Mortification</div>
+                    </div>
+                    <div class="p-3 bg-stone-50 rounded border border-stone-200">
+                        <div class="font-cinzel text-xl font-bold text-amber-800">DRA Vulgate</div>
+                        <div class="text-xs text-stone-600">Literal Sacred Exegesis</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DAY NAVIGATION SELECTOR & FILTERS -->
+        <section class="space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-stone-200 pb-3">
+                <div>
+                    <h3 class="font-cinzel font-bold text-xl text-stone-900">Curriculum Day Selection</h3>
+                    <p class="text-xs text-stone-600">Filter by Patriarch or select a day to load biblical exegesis, patristic typology, and physical disciplines.</p>
+                </div>
+                <!-- Filter Buttons -->
+                <div class="flex flex-wrap gap-2 text-xs" id="patriarch-filters">
+                    <button onclick="filterDays('ALL')" class="px-3 py-1.5 rounded border border-amber-800 bg-amber-800 text-white font-medium filter-btn" data-filter="ALL">All Days</button>
+                    <button onclick="filterDays('Abraham')" class="px-3 py-1.5 rounded border border-stone-300 bg-white text-stone-700 hover:bg-stone-100 font-medium filter-btn" data-filter="Abraham">Abraham</button>
+                    <button onclick="filterDays('Isaac')" class="px-3 py-1.5 rounded border border-stone-300 bg-white text-stone-700 hover:bg-stone-100 font-medium filter-btn" data-filter="Isaac">Isaac</button>
+                    <button onclick="filterDays('Jacob')" class="px-3 py-1.5 rounded border border-stone-300 bg-white text-stone-700 hover:bg-stone-100 font-medium filter-btn" data-filter="Jacob">Jacob</button>
+                    <button onclick="filterDays('Lot')" class="px-3 py-1.5 rounded border border-stone-300 bg-white text-stone-700 hover:bg-stone-100 font-medium filter-btn" data-filter="Lot">Lot / Servant</button>
+                </div>
+            </div>
+
+            <!-- DAY GRID BUTTONS -->
+            <div class="grid grid-cols-2 sm:grid-cols-5 md:grid-cols-10 gap-2" id="day-grid">
+                <!-- Javascript dynamic population -->
+            </div>
+        </section>
+
+        <!-- DEVOTIONAL CONTENT DISPLAY AREA -->
+        <section id="devotional-display" class="bg-white rounded-lg border border-stone-300 shadow-md p-6 sm:p-10 space-y-8 transition-all duration-300">
+            <!-- Dynamic Content Injected Here via JS -->
+        </section>
+
+        <!-- COMPARATIVE MATRIX & ANALYTICS SECTION -->
+        <section class="space-y-6">
+            <div class="border-b border-stone-200 pb-2">
+                <h3 class="font-cinzel font-bold text-2xl text-stone-900">Patriarchal Intercession & Theological Structure</h3>
+                <p class="text-sm text-stone-600">Analytical breakdown of intercessory dimensions, scriptural comparison matrices, and overall spiritual habit metrics.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- CHART 1: PATRIARCHAL INTERCESSION RADAR -->
+                <div class="bg-white p-6 rounded-lg border border-stone-200 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <h4 class="font-cinzel font-bold text-lg text-stone-900 mb-1">Ascetical & Intercessory Dynamics</h4>
+                        <p class="text-xs text-stone-600 mb-4">Quantifying core spiritual forces in patriarchal intercession across four distinct axes.</p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="intercessionRadarChart"></canvas>
+                    </div>
+                    <div class="mt-4 text-xs text-stone-500 bg-stone-50 p-3 rounded border border-stone-200">
+                        <strong class="text-stone-800">Insight:</strong> Patriarchal intercession directly bridges intense personal humility and physical discomfort with elevated Christological typology.
+                    </div>
+                </div>
+
+                <!-- CHART 2: DISCIPLINE & HABIT PROGRESSION -->
+                <div class="bg-white p-6 rounded-lg border border-stone-200 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <h4 class="font-cinzel font-bold text-lg text-stone-900 mb-1">Curriculum Completion Analytics</h4>
+                        <p class="text-xs text-stone-600 mb-4">Track your total performance across Scripture Study, Uncomfortable Charity, and Kneeling Prayer.</p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="completionProgressChart"></canvas>
+                    </div>
+                    <div class="mt-4 text-xs text-stone-500 bg-stone-50 p-3 rounded border border-stone-200">
+                        <strong class="text-stone-800">Target:</strong> 100% completion requires fulfilling all 30 elements (10 days x 3 daily requirements).
+                    </div>
+                </div>
+            </div>
+
+            <!-- INTERACTIVE SCRIPTURAL COMPARISON TABLES -->
+            <div class="bg-white p-6 sm:p-8 rounded-lg border border-stone-200 shadow-sm space-y-6">
+                <div>
+                    <h4 class="font-cinzel font-bold text-xl text-stone-900 mb-2">Exegesis Comparison Matrices</h4>
+                    <p class="text-sm text-stone-600">Detailed thematic analysis comparing strategic behaviors and hospitality models in Genesis.</p>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- Table 1: Gen 32 Strategies -->
+                    <div class="overflow-x-auto custom-scrollbar">
+                        <h5 class="text-sm font-bold text-amber-800 uppercase tracking-wider mb-2">Genesis 32: Jacob's Survival Strategies at the Jabbok</h5>
+                        <table class="w-full text-left text-xs sm:text-sm border-collapse border border-stone-200">
+                            <thead>
+                                <tr class="bg-stone-800 text-stone-100 font-cinzel">
+                                    <th class="p-3 border border-stone-700">Action</th>
+                                    <th class="p-3 border border-stone-700">Practical Execution</th>
+                                    <th class="p-3 border border-stone-700">Theological Posture</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-stone-200 bg-stone-50/50">
+                                <tr class="hover:bg-amber-50/40">
+                                    <td class="p-3 font-semibold border border-stone-200 text-stone-900">Division of Camp</td>
+                                    <td class="p-3 border border-stone-200 text-stone-700">Separating family and flocks into two groups (Mahanaim).</td>
+                                    <td class="p-3 border border-stone-200 text-stone-700">Acknowledging human limitation; minimizing catastrophic loss.</td>
+                                </tr>
+                                <tr class="hover:bg-amber-50/40">
+                                    <td class="p-3 font-semibold border border-stone-200 text-stone-900">Intercessory Prayer</td>
+                                    <td class="p-3 border border-stone-200 text-stone-700">Pleading based on Yahweh's covenantal promises and mercy.</td>
+                                    <td class="p-3 border border-stone-200 text-stone-700">Confessing complete unworthiness and total dependence on divine grace.</td>
+                                </tr>
+                                <tr class="hover:bg-amber-50/40">
+                                    <td class="p-3 font-semibold border border-stone-200 text-stone-900">Appeasement Gift</td>
+                                    <td class="p-3 border border-stone-200 text-stone-700">Sending 580 choice animals in successive droves to Esau.</td>
+                                    <td class="p-3 border border-stone-200 text-stone-700">Attempting ANE restorative justice and covering the offense (atonement).</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Table 2: Gen 18 vs 19 -->
+                    <div class="overflow-x-auto custom-scrollbar">
+                        <h5 class="text-sm font-bold text-amber-800 uppercase tracking-wider mb-2">Genesis 18 & 19: Hospitality & Intercession Typology</h5>
+                        <table class="w-full text-left text-xs sm:text-sm border-collapse border border-stone-200">
+                            <thead>
+                                <tr class="bg-stone-800 text-stone-100 font-cinzel">
+                                    <th class="p-3 border border-stone-700">Feature</th>
+                                    <th class="p-3 border border-stone-700">Abraham (Genesis 18)</th>
+                                    <th class="p-3 border border-stone-700">Lot (Genesis 19)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-stone-200 bg-stone-50/50">
+                                <tr class="hover:bg-amber-50/40">
+                                    <td class="p-3 font-semibold border border-stone-200 text-stone-900">Location & Setting</td>
+                                    <td class="p-3 border border-stone-200 text-stone-700">Tent door at the Oaks of Mamre (open, hospitable realm).</td>
+                                    <td class="p-3 border border-stone-200 text-stone-700">Gateway inside the walls of Sodom (corrupted civic center).</td>
+                                </tr>
+                                <tr class="hover:bg-amber-50/40">
+                                    <td class="p-3 font-semibold border border-stone-200 text-stone-900">Response to Divine Visitors</td>
+                                    <td class="p-3 border border-stone-200 text-stone-700">Ran to meet them, bowed low, prepared lavish feast of calf & milk.</td>
+                                    <td class="p-3 border border-stone-200 text-stone-700">Rose, bowed with face to ground, invited inside under threat.</td>
+                                </tr>
+                                <tr class="hover:bg-amber-50/40">
+                                    <td class="p-3 font-semibold border border-stone-200 text-stone-900">Intercessory Focus</td>
+                                    <td class="p-3 border border-stone-200 text-stone-700">Bravely negotiated for the righteous in a wicked foreign city.</td>
+                                    <td class="p-3 border border-stone-200 text-stone-700">Pleaded franticly for personal survival and the sanctuary of Zoar.</td>
+                                </tr>
+                                <tr class="hover:bg-amber-50/40">
+                                    <td class="p-3 font-semibold border border-stone-200 text-stone-900">Divine Result</td>
+                                    <td class="p-3 border border-stone-200 text-stone-700">God promised mercy for ten righteous; revealed covenant secrets.</td>
+                                    <td class="p-3 border border-stone-200 text-stone-700">God spared Zoar for Lot's sake; dragged family from fire.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- INTERCESSORY JOURNAL & RULE OF LIFE TRACKER -->
+        <section class="bg-stone-900 text-stone-100 p-6 sm:p-8 rounded-lg shadow-lg border border-amber-800 space-y-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-stone-800 pb-4">
+                <div>
+                    <h3 class="font-cinzel font-bold text-2xl text-stone-100">Patriarchal Intercessory Journal</h3>
+                    <p class="text-xs text-stone-400">Record localized intercessions, family burdens, and physical reflections for your spiritual rule of life.</p>
+                </div>
+                <div id="journal-storage-badge" class="text-xs text-amber-500 bg-amber-950/60 border border-amber-800/60 px-3 py-1.5 rounded flex items-center gap-1.5">
+                    <span>💾 Auto-saved to Local Storage (Sign in to sync across devices)</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Intentions Box -->
+                <div class="space-y-2">
+                    <label class="block font-cinzel text-sm font-semibold text-amber-500">1. Specific Intercessions (Family, Community, Adversaries)</label>
+                    <textarea id="journal-intentions" class="w-full h-36 bg-stone-800 border border-stone-700 rounded p-3 text-stone-200 text-sm focus:border-amber-700 focus:outline-none custom-scrollbar" placeholder="List specific individuals you are standing in the breach for today (e.g., spouse, family members, rivals, community leaders)..."></textarea>
+                </div>
+
+                <!-- Personal Mortification & Experience Notes -->
+                <div class="space-y-2">
+                    <label class="block font-cinzel text-sm font-semibold text-amber-500">2. Mortification & Kneeling Reflection Notes</label>
+                    <textarea id="journal-reflections" class="w-full h-36 bg-stone-800 border border-stone-700 rounded p-3 text-stone-200 text-sm focus:border-amber-700 focus:outline-none custom-scrollbar" placeholder="Record physical struggles during the 15-min rigid kneeling, insights gained during the act of charity, or internal friction..."></textarea>
+                </div>
+            </div>
+
+            <div class="flex justify-end space-x-3">
+                <button onclick="clearJournal()" class="px-4 py-2 bg-stone-800 hover:bg-stone-700 text-stone-300 rounded text-xs font-semibold border border-stone-700">Clear Journal</button>
+                <button onclick="saveJournal()" class="px-5 py-2 bg-amber-800 hover:bg-amber-700 text-white rounded text-xs font-semibold border border-amber-700">Save Journal Entries</button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-stone-900 text-stone-400 border-t border-stone-800 py-8 mt-12 text-center text-xs space-y-2">
+        <div class="max-w-7xl mx-auto px-4">
+            <p class="font-cinzel text-stone-300 font-semibold text-sm">A Theological & Ascetical Framework for Masculine Intercession</p>
+            <p>Scriptures drawn strictly from the Douay-Rheims 1899 American Edition (DRA) Latin Vulgate translation.</p>
+            <p class="text-stone-500 pt-2">Structured on the Catholic Novena + St. Ignatius "+1" Rule in the Spiritual Exercises.</p>
+        </div>
+    </footer>
+
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div id="devotional-toast" class="fixed bottom-5 right-5 z-50 transform transition-all duration-300 translate-y-20 opacity-0 pointer-events-none bg-stone-900 border border-amber-700 text-stone-100 text-xs px-4 py-2.5 rounded-lg shadow-xl flex items-center space-x-2">
+        <span id="toast-icon">☁️</span>
+        <span id="toast-message">Message</span>
+    </div>
+
+    <!-- FIREBASE ES MODULE BRIDGE -->
+    <script type="module">
+        import { 
+            isConfigured, 
+            loginWithGoogle, 
+            logoutUser, 
+            onAuthStateChange, 
+            loadUserData, 
+            saveUserData 
+        } from './firebase-config.js';
+
+        window.DevotionalAuth = {
+            isConfigured,
+            loginWithGoogle,
+            logoutUser,
+            onAuthStateChange,
+            loadUserData,
+            saveUserData
+        };
+
+        window.dispatchEvent(new CustomEvent('auth-ready'));
+    </script>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        /* FULL DATABASE FOR THE 10 DAYS DRAWN FROM REFINED MANUSCRIPT */
+        const dayData = [
+            {
+                day: 1,
+                title: "Standing in the Breach",
+                patriarch: "Abraham",
+                passageRef: "Genesis 18:23-26",
+                theme: "Intercession",
+                radarScores: [9, 8, 9, 8], // Humility, Physical Strain, Prophetic Courage, Social Friction
+                scripture: `"And drawing nigh, he said: Wilt thou destroy the just with the wicked? If there be fifty just men in the city, shall they perish withal? and wilt thou not spare that place for the sake of the fifty just, if they be therein? Far be it from thee to do this thing, and to slay the just with the wicked, and for the just to be in like case as the wicked, this is not beseeming thee: thou who judgest all the earth, wilt not make this judgment. And the Lord said to him: If I find in Sodom fifty just within the city, I will spare the whole place for their sake." (Genesis 18:23-26)`,
+                context: `The narrative unfolds during the oppressive heat of the midday sun at the oaks of Mamre. Abraham, resting at the entrance of his tent, is visited by three divine travelers. Ancient Near Eastern (ANE) hospitality norms dictated a swift response, which Abraham exceeds by providing curds, milk, and a freshly prepared, tender calf. Following this meal, Yahweh reveals the impending doom of Sodom and Gomorrah, citing that the outcry against them is "great" and their sin "very grave". Down in that valley of wickedness resides Lot, Abraham's flesh and blood. Abraham then initiates a breathless, high-stakes legal negotiation with the Creator, asking: "thou who judgest all the earth, wilt not make this judgment". He systematically cross-examines divine justice, negotiating the required righteous men from fifty down to ten.`,
+                theology: `Patristic commentators, such as St. John Chrysostom, marvel at Abraham’s audacity, noting that he adds petition to petition without ceasing, utilizing his relational capital with God entirely for the sake of a condemned city. Abraham’s intercession is an act of profound spiritual sacrifice. He serves as an early type of Christ, the true High Priest who stands in the breach between divine justice and human rebellion, interceding for a world facing destruction. Right worship is demonstrated here not as isolated piety, but as stepping outside personal comfort to advocate for the lost.`,
+                reflection: `A righteous man does not passively watch the destruction of his community. Abraham negotiated with God to save a wicked city primarily because his blood relative lived there. The modern man is called to serve as a protective spiritual shield for his extended family and community, standing in the breach for those who are entirely ignorant of the danger they face. Masculine virtue demands that a man leverage his own standing before God to plead for the mercy of those who cannot, or will not, pray for themselves.`,
+                prayer: `“Lord, I stand before You today on behalf of my community and my extended family. Where there is sin, bring Your mercy. Spare them from the consequences of their actions, and let my faithfulness be a protective shield for those I love. Do not allow my pursuit of personal holiness to isolate me from the desperate needs of the world. Amen.”`,
+                charityTitle: "The Discipline of Menial Labor",
+                charityDesc: "Seek out an environment of decay, neglect, or profound need (such as a local homeless shelter, a dilapidated public park, or an impoverished urban sector) and perform two hours of grueling, unglamorous physical labor (scrubbing facilities, hauling heavy refuse, industrial kitchen prep). Must be physically exhausting, executed in complete anonymity, and completely devoid of expected gratitude to break the male ego's reliance on status.",
+                disciplineDesc: "For exactly fifteen minutes, remain on your knees on the floor before a Crucifix in total silence and absolute physical stillness. Mastery of the body through stillness, uniting localized physical discomfort with the redemptive Passion of Christ."
+            },
+            {
+                day: 2,
+                title: "Healing the Outsider",
+                patriarch: "Abraham",
+                passageRef: "Genesis 20:14-15, 17-18",
+                theme: "Intercession",
+                radarScores: [10, 5, 7, 9],
+                scripture: `"And Abimelech took sheep and oxen, and servants and handmaids, and gave to Abraham: and restored to him Sara, his wife. And said: The land is before you, dwell wheresoever it shall please thee. ... And when Abraham prayed, God healed Abimelech and his wife, and his handmaids, and they bore children: For the Lord had closed up every womb of the house of Abimelech on account of Sara, Abraham's wife." (Genesis 20:14-15, 17-18)`,
+                context: `Abraham journeys to the Negev trade corridor in Gerar. Fearing the Philistine locals, he resorts to a cowardly half-truth, claiming Sarah is merely his sister. King Abimelech—whose name appears in 2nd millennium Amarna letters as Abi-Milki—takes Sarah into his royal harem. God immediately intervenes, inflicting a plague closing all wombs in Abimelech's house and threatening the king in a dream: "Behold thou shalt die". Abimelech asserts moral innocence, to which God agrees, but decrees that restoration will come strictly through Abraham—marking the first use of the Hebrew word nābîʾ (prophet) in Scripture. Abraham must swallow the humiliation of his deceit and intercede for the pagan king.`,
+                theology: `Abraham must sacrifice his pride and human grievances to intercede for the very man who threatened his marriage. The prophetic office (nābîʾ) is shown to be mediatorial and outward-facing; the prophet must bring healing to the outsider, even when the prophet's own failures initiated the crisis. This prefigures Christ upon the Cross, who offered the ultimate priestly intercession for the very men executing Him.`,
+                reflection: `God healed a foreign king’s household only after the offending prophet prayed for him. The faithful man is required to be an instrument of grace not only for his friends but for his adversaries and competitors. Masculine virtue demands laying down animosity, territorialism, and the desperate need to be "right" in order to mediate God's grace to those who cause friction.`,
+                prayer: `“Father, I lift up those outside my household today, especially those who oppose me, compete with me, or cause me distress. Grant me the grace to pray for them with genuine, sacrificial love. Bring healing to their homes, resolve our conflicts, and violently humble my pride so that I may be an instrument of Your peace. Amen.”`,
+                charityTitle: "The Discipline of Humiliation",
+                charityDesc: "Identify a colleague, peer, or acquaintance with whom you have a strained, competitive, or hostile relationship. Initiate contact, admit to any wrongdoing, ask for forgiveness for your contributions to the friction (regardless of their guilt), and ask if there is anything you can do to make amends. Actively burns away the male desire for dominance.",
+                disciplineDesc: "Fifteen minutes of rigid kneeling in silence before the Crucifix. Fix your gaze on the Cross, focusing entirely on Christ's words of forgiveness ('Father, forgive them'), actively crucifying internal grievances, resentments, and defensive pride."
+            },
+            {
+                day: 3,
+                title: "The Steward’s Labor",
+                patriarch: "Servant",
+                passageRef: "Genesis 24:12-14",
+                theme: "Stewardship",
+                radarScores: [8, 9, 6, 4],
+                scripture: `"And he said: O Lord the God of my master Abraham, meet me to day, I beseech thee, and shew kindness to my master Abraham. Behold I stand nigh the spring of water, and the daughters of the inhabitants of this city will come out to draw water. Now, therefore, the maid to whom I shall say: Let down thy pitcher that I may drink: and she shall answer, Drink, and I will give thy camels drink also: let it be the same whom thou hast provided for thy servant Isaac: and by this I shall understand, that thou hast shewn kindness to my master." (Genesis 24:12-14)`,
+                context: `Abraham binds his chief servant with a solemn physical oath—placing his hand under his thigh—a severe ANE covenantal gesture symbolizing absolute fidelity linked to Abraham's posterity. Tasked with traveling across dangerous desert to Mesopotamia to secure a bride for Isaac, the servant arrives at evening with ten camels laden with wealth. Knowing human cleverness is insufficient, he commands the camels to kneel by the well and begs Yahweh for a specific, miraculous sign of sacrificial hospitality.`,
+                theology: `The servant’s prayer is completely devoid of personal ambition; it is an act of pure, selfless stewardship. He sacrifices self-reliance, recognizing that covenant survival depends entirely on divine providence rather than management skills. Theologically, the servant acts as a type of the Holy Spirit or Christ Himself, who emptied Himself of His own will to secure a Bride—the Church.`,
+                reflection: `The faithful steward prays for success not for personal glory, wealth accumulation, or ego, but solely to serve his master's household. When a man engages in daily labor, it must be viewed as an exercise in stewardship, not self-actualization. Professional and physical efforts are consecrated tools meant to secure the thriving of family and Church.`,
+                prayer: `“Lord God, grant me success in my labor today. Strip me of my desire for personal glory, status, and the accumulation of wealth for my own comfort. Let the grueling work of my hands provide security for my family and serve the building up of Your Kingdom. Make me a faithful, invisible steward. Amen.”`,
+                charityTitle: "The Discipline of Physical Deprivation",
+                charityDesc: "Undertake a strict 24-hour fast, consuming only water. During this state of physical depletion, hunger, and irritability, perform a heavy manual chore for your local parish, an elderly neighbor, or community center. Endure without complaining, resting, or revealing your fasting state.",
+                disciplineDesc: "Fifteen minutes of rigid kneeling before the Crucifix. Unite physical hunger and fatigue to Christ carrying the wood of the Cross. Focus on the body as an instrument designed to be spent and exhausted for others."
+            },
+            {
+                day: 4,
+                title: "A Husband’s Petition",
+                patriarch: "Isaac",
+                passageRef: "Genesis 25:20-23",
+                theme: "Protection",
+                radarScores: [7, 6, 8, 5],
+                scripture: `"And when he was forty years old, he took to wife Rebecca the daughter of Bathuel the Syrian of Mesopotamia, sister to Laban. And Isaac besought the Lord for his wife, because she was barren: and he heard him, and made Rebecca to conceive. But the children struggled in her womb: and she said: If it were to be so with me, what need was there to conceive? And she went to consult the Lord. And he answering said: Two nations are in thy womb..." (Genesis 25:20-23)`,
+                context: `Isaac and Rebekah face a twenty-year biological and covenantal crisis of barrenness. While Abraham attempted a forced human solution through Hagar (resulting in generational strife), Isaac steps fully into his priestly role as patriarch, persistently interceding for his wife. Patristic commentators like Origen and Chrysostom emphasize the extraordinary, agonizing faith required for Isaac to pray continuously for two decades without a visible answer.`,
+                theology: `Isaac’s intercession represents the sacrifice of enduring, patient faith over immediate mechanical action. True priestly intercession within the home requires bearing the deep, silent burdens of one's spouse and offering them up continually to God when all human solutions fail. Isaac points directly to Christ, the Bridegroom who knows the sufferings of His Bride (the Church).`,
+                reflection: `Witnessing his wife's deep pain, Isaac's response was not human engineering or dismissiveness, but turning to God on her behalf. A husband's most powerful act of love is to consistently carry his wife's deepest struggles and quietest sorrows to the Lord, dying to the male desire to fix things mechanically or verbally dismiss them.`,
+                prayer: `“Heavenly Father, I entrust my wife [or future wife/the women in my family] entirely to Your care. You know the burdens she carries and the quiet sorrows she hides. Answer her deepest needs, heal her wounds, and make me a source of unyielding strength, patient understanding, and priestly comfort for her. Amen.”`,
+                charityTitle: "The Discipline of Hidden Servitude",
+                charityDesc: "Identify the most physically repulsive, tedious, or exhausting household chore that your wife (or female family member/roommate) normally handles (e.g., deep-cleaning bathrooms, scrubbing baseboards). Wake up several hours before dawn to complete it perfectly. Never mention it or accept praise.",
+                disciplineDesc: "Fifteen minutes of rigid kneeling in silence before the Crucifix. Focus on the hidden, unglamorous nature of Christ's love for the Church, embracing silence as a weapon against the ego's demand for recognition."
+            },
+            {
+                day: 5,
+                title: "Protecting the Vulnerable",
+                patriarch: "Jacob",
+                passageRef: "Genesis 32:9-11",
+                theme: "Protection",
+                radarScores: [9, 7, 9, 8],
+                scripture: `"And Jacob said: O God of my father Abraham, and God of my father Isaac, O Lord, who saidst to me: Return to thy land and to the place of thy birth, and I will do well for thee, I am not worthy of the least of all thy mercies... Deliver me from the hand of my brother Esau, for I am greatly afraid of him: lest perhaps he come, and kill the mother with the children." (Genesis 32:9-11)`,
+                context: `Returning after 20 years in exile, Jacob faces Esau marching toward him with an army of 400 men—a standard ANE militia size indicating lethal threat. The Hebrew text notes Jacob is in terror (yārēʾ) and intense distress (ṣāḥaq). At the river Jabbok, Jacob divides his camp (Mahanaim = two camps) and falls to his knees, pleading specifically for the lives of "the mother with the children".`,
+                theology: `Jacob offers a sacrifice of total humiliation, stripping away reliance on manipulation. He openly admits unworthiness and begs for the survival of a family rendered vulnerable by his past sins. Theologically, he becomes a type of Christ, stepping into the breach to absorb the wrath of justice to save the vulnerable.`,
+                reflection: `Faced with destruction, Jacob admitted his terror and prayed specifically for his family's safety. It is natural to feel fear regarding family security. The faithful man does not mask fear with false bravado or toxic stoicism; he brings anxiety directly to God while taking rigorous practical protective action.`,
+                prayer: `“Deliver me, Lord, from the anxieties and fears that paralyze me in the dark. I place the physical and spiritual safety of my family entirely in Your hands. You are our refuge and fortress; grant me the courage to stand unflinchingly between my household and the threats of this world. Amen.”`,
+                charityTitle: "The Discipline of Emotional Vulnerability",
+                charityDesc: "Sit down with a spouse, close friend, or spiritual mentor, look them directly in the eye, and confess a specific, deep-seated fear, anxiety, or past moral failure kept hidden out of pride. Shatters the masculine facade of invulnerability.",
+                disciplineDesc: "Fifteen minutes of rigid kneeling in silence before the Crucifix. Contemplate Christ stripped of His garments on the Cross, uniting emotional exposure to the total humiliation and vulnerability of the Savior."
+            },
+            {
+                day: 6,
+                title: "Blessing the Next Generation",
+                patriarch: "Jacob",
+                passageRef: "Genesis 48:13-16",
+                theme: "Truth",
+                radarScores: [7, 6, 10, 7],
+                scripture: `"But Israel stretching forth his right hand, put it upon the head of Ephraim the younger brother; and the left upon the head of Manasses who was the elder, changing his hands. And Jacob blessed the sons of Joseph, and said: God, in whose sight my fathers Abraham and Isaac walked, God that feedeth me from my youth until this day... bless these boys..." (Genesis 48:13-16)`,
+                context: `Dying in Goshen, Jacob receives Joseph and his foreign-born half-Egyptian sons, Manasseh and Ephraim. Though dim of sight, Jacob demonstrates piercing spiritual vision. Deliberately defying Joseph's alignment, Jacob crosses his arms, placing his right hand on younger Ephraim, anchoring these foreign-born boys directly into Abraham's covenant.`,
+                theology: `Patristic fathers like Augustine and Ambrose noted deep typological significance: by crossing his arms, Jacob formed the shape of the Cross to impart blessing. Jacob sacrifices human tradition for divine providence, prefiguring Christ extending divine adoption to the Gentiles through the mystery and geometry of the Cross.`,
+                reflection: `Jacob invoked God to bless his grandsons, ensuring they knew their spiritual lineage. Modern men have largely abandoned patriarchal spiritual authority. Fathers and mentors possess inherent authority to speak protection, identity, and blessing. Withholding verbal blessing out of awkwardness starves the next generation.`,
+                prayer: `“Lord, the God who has led me all my life, I ask Your heavy blessing upon the children and youth in my care. Protect them from the evil of this age, guide their steps, and let them grow to know Your steadfast love. Give me the raw courage to speak Your truth over them without hesitation. Amen.”`,
+                charityTitle: "The Discipline of Prophetic Speech",
+                charityDesc: "Physically place hands on the head or shoulders of your child, godchild, or a younger man you mentor. Looking them directly in the eye, pray aloud over them, invoking God's blessing and calling out a specific spiritual virtue or latent strength developing in them.",
+                disciplineDesc: "Fifteen minutes of rigid kneeling before the Crucifix. Meditate on Jacob's crossed arms and Christ's nailed arms on the Cross, recognizing spiritual authority requires complete sacrifice of self."
+            },
+            {
+                day: 7,
+                title: "Love for the Unexpected Path",
+                patriarch: "Abraham",
+                passageRef: "Genesis 17:15-18",
+                theme: "Detachment",
+                radarScores: [8, 7, 7, 9],
+                scripture: `"God said also to Abraham: Sara thy wife thou shalt not call Sara, but Sara... And Abraham fell upon his face, and laughed, saying in his heart: Shall a son, thinkest thou, be born to him that is a hundred years old? ... And he said to God: O that Ismael may live before thee." (Genesis 17:15-18)`,
+                context: `At 99, Abram receives his new name Abraham and the promise that barren Sarah will bear Isaac. Overwhelmed, Abraham falls on his face. Yet amidst this revelation, his heart aches for 13-year-old Ishmael. Fearing his firstborn will be discarded, Abraham desperately intercedes: "O that Ismael may live before thee!". God affirms Isaac's covenant, but promises to multiply Ishmael.`,
+                theology: `Abraham's prayer is a sacrifice of paternal anxiety, lifting up the son falling outside the expected covenantal script. Right worship brings natural human loves to God. Prefigures Christ, the Good Shepherd whose sacrificial intercession extends beyond the expected flock to heal those on the margins.`,
+                reflection: `Despite Isaac being the covenant child, Abraham fiercely loved Ishmael and begged God for his future. Men must pray relentlessly for all dependents. When dependents stray from expected or righteous paths, the masculine response is not abandonment or withdrawal, but intensified intercession.`,
+                prayer: `“Lord, I pray for those in my care who have wandered, rebelled, or chosen unexpected paths. Wherever they are in their journey, let them live in Your sight. Provide a path for them to flourish, protect them from their own ruin, and remind them that they are fiercely loved by You and by me. Amen.”`,
+                charityTitle: "The Discipline of the Margin",
+                charityDesc: "Sacrifice weekend rest to visit an environment completely outside your socio-economic comfort zone (prison ministry, homeless encampment, impoverished sector). Identify a marginalized man, buy him a meal, and spend one hour exclusively listening to his story without offering platitudes or attempting to fix him.",
+                disciplineDesc: "Fifteen minutes of rigid kneeling in silence before the Crucifix. Reflect on Christ leaving heaven's comfort to enter the filthy margins of human suffering, uniting discomfort with descending love."
+            },
+            {
+                day: 8,
+                title: "Securing a Sanctuary",
+                patriarch: "Lot",
+                passageRef: "Genesis 19:15-17, 20",
+                theme: "Protection",
+                radarScores: [6, 8, 5, 8],
+                scripture: `"And as he lingered, they took his hand, and the hand of his wife, and of his two daughters, because the Lord spared him. And they brought him forth, and set him without the city... There is this city here at hand, to which I may flee, it is a little one, and I shall be saved in it..." (Genesis 19:15-17, 20)`,
+                context: `In Sodom, public ethos has collapsed into violence. Lot sits in the gateway—a position of civic administration. As judgment falls, angels physically drag Lot and his family outside the city. Paralyzed by exhaustion and terror, Lot pleads for small nearby Zoar ("is it not a little one"), begging to secure a sliver of safety before the fire falls.`,
+                theology: `Though Lot's faith is weak and prayer driven by panic, God graciously accepts imperfect intercession to spare Zoar. St. Augustine notes God's willingness to condescend to human frailty to preserve a remnant. Christ becomes our ultimate Zoar sanctuary from divine justice.`,
+                reflection: `Fleeing destruction, Lot begged for a small place of refuge. A father's duty is securing a physical and spiritual sanctuary where faith, peace, and order can survive amidst cultural decay. Ruthlessly audit your home to ensure it is a fortress against the mob mentality of the outside world.`,
+                prayer: `“Father, in a world that is deeply hostile to faith and purity, make my home a sanctuary. Protect our physical and spiritual borders from the decay of the culture. Accept my weak, imperfect prayers, and grant us a place of unyielding peace. Amen.”`,
+                charityTitle: "The Discipline of the Intrusion",
+                charityDesc: "Deliberately disrupt your sanctuary: Invite an individual who is socially abrasive, deeply troubled, or lonely into your home for a formal dinner, OR financially sponsor rent/utilities for someone in crisis to the point of severe budget impact.",
+                disciplineDesc: "Fifteen minutes of rigid kneeling in silence before the Crucifix. Meditate on Christ allowing His bodily sanctuary to be violently destroyed so humanity might find eternal refuge. Surrender the idol of an undisturbed life."
+            },
+            {
+                day: 9,
+                title: "Letting Go",
+                patriarch: "Jacob",
+                passageRef: "Genesis 43:11-14",
+                theme: "Detachment",
+                radarScores: [9, 6, 9, 6],
+                scripture: `"Then Israel their father said to them: If it must needs be so, do what you will: take of the best fruits of the land... And take also your brother, and go to the man. And may my almighty God make him favourable to you; and send back with you your brother, whom he keepeth, and this Benjamin: and as for me I shall be desolate without children." (Genesis 43:11-14)`,
+                context: `Famine stalks Canaan. Egypt's vizier (Joseph) demands Benjamin before selling more grain. Shattered by Joseph's prior loss, Jacob prefers starvation to risking Rachel's remaining son. Realizing total powerlessness, Jacob releases Benjamin into the unknown with balm, honey, storax, myrrh, pistachios, double silver, and an agonizing prayer to El Shaddai.`,
+                theology: `Jacob offers the ultimate paternal sacrifice: surrendering his most beloved son to secure the physical salvation of his extended family. Right worship requires releasing what one loves most into divine providence. Prefigures God the Father sacrificing His Son.`,
+                reflection: `Famine forced Jacob to let Benjamin travel into danger. There comes a moment when a man can no longer control circumstances. He must send dependents into a hostile world armed with blessing and God's mercy. Holding on too tightly out of fear invites spiritual starvation.`,
+                prayer: `“God Almighty, I cannot always be present to protect those I love, nor can I control the outcomes of my labor. As they go out into the world today, grant them mercy and favor. Keep them safe, guard their hearts, and give me the agonizing strength to release them completely. Amen.”`,
+                charityTitle: "The Discipline of Detachment",
+                charityDesc: "Identify a highly prized personal possession (valuable tool, favorite watch, expensive sporting gear, collection) and physically give it away to another man who would appreciate it. Sever earthly attachment completely without asking for return or mentioning value.",
+                disciplineDesc: "Fifteen minutes of rigid kneeling in silence before the Crucifix. Meditate on the Father's absolute detachment in sending the Son, surrendering His spirit into the Father's hands."
+            },
+            {
+                day: 10,
+                title: "A Father’s Final Word",
+                patriarch: "Jacob",
+                passageRef: "Genesis 49:1-2, 28-29",
+                theme: "Truth",
+                radarScores: [8, 9, 10, 10],
+                scripture: `"And Jacob called his sons, and said to them: Gather yourselves together that I may tell you the things that shall befall you in the last days... All these are the twelve tribes of Israel: these things their father spoke to them, and he blessed every one, with their proper blessings." (Genesis 49:1-2, 28-29)`,
+                context: `Dying in Egypt, Jacob summons his twelve sons—men marked by profound messiness and violence: Reuben the defiler, Simeon and Levi the mass murderers, and Judah who sold his brother. Using his last breaths, Jacob utters unvarnished prophetic judgments and blessings, binding them to Yahweh's covenant.`,
+                theology: `Jacob’s final act is sacrificing his last strength for sons who did not deserve blessing. He refuses to abdicate paternal authority despite past sins. Types Christ, who on the Cross offered final intercession and mediation for the men who betrayed Him.`,
+                reflection: `On his deathbed, Jacob imparted distinct, unvarnished blessing and judgment to each son. A father's words carry world-altering weight. Speak prophetic hard truth, correction, and blessing over dependents, refusing the cowardice of silence.`,
+                prayer: `“Lord, give me the piercing wisdom to see the unique gifts and severe flaws of my family members and friends. Put the right words in my mouth so that I might speak life, necessary correction, and Your divine blessing over their futures. Amen.”`,
+                charityTitle: "The Discipline of Truth in Love",
+                charityDesc: "Initiate a difficult, uncomfortable conversation with a brother, son, or close friend. Look him in the eye and call out a specific destructive sin or pattern of mediocrity in his life, followed immediately by calling out his high potential in Christ.",
+                disciplineDesc: "Fifteen minutes of rigid kneeling in silence before the Crucifix. Meditate on Christ's final words ('It is finished') and your inevitable death. Pray to die empty, having spoken every word of truth, correction, and blessing required."
+            }
+        ];
+
+        /* MANDATORY DEVOTIONAL CONCLUDING PRAYERS TEXT */
+        const mandatoryPrayersHTML = `
+            <div class="mt-6 border-t border-stone-800 pt-4 space-y-3 text-stone-300 text-xs sm:text-sm">
+                <div class="flex items-center justify-between cursor-pointer bg-stone-950 p-3 rounded border border-stone-800 hover:border-amber-700 transition-colors" onclick="togglePrayersAccordion()">
+                    <span class="font-cinzel font-bold text-amber-500 flex items-center space-x-2">
+                        <span>📜</span>
+                        <span>Mandatory Daily Concluding Prayers (Click to Expand/Collapse)</span>
+                    </span>
+                    <span id="accordion-arrow" class="text-amber-500 font-bold">▼</span>
+                </div>
+
+                <div id="prayers-accordion-body" class="hidden space-y-4 bg-stone-950 p-4 rounded border border-stone-800/80 font-serif leading-relaxed">
+                    <div>
+                        <div class="font-cinzel font-bold text-amber-500 text-xs uppercase tracking-wider mb-1">1. Our Father (Pater Noster)</div>
+                        <p class="text-stone-300 italic">"Our Father, who art in heaven, hallowed be Thy name. Thy kingdom come, Thy will be done, on earth as it is in heaven. Give us this day our daily bread, and forgive us our trespasses, as we forgive those who trespass against us. And lead us not into temptation, but deliver us from evil. Amen."</p>
+                    </div>
+
+                    <div>
+                        <div class="font-cinzel font-bold text-amber-500 text-xs uppercase tracking-wider mb-1">2. Three Hail Marys (Ave Maria x3)</div>
+                        <p class="text-stone-300 italic">"Hail Mary, full of grace, the Lord is with thee. Blessed art thou amongst women, and blessed is the fruit of thy womb, Jesus. Holy Mary, Mother of God, pray for us sinners, now and at the hour of our death. Amen." (Repeat 3 times)</p>
+                    </div>
+
+                    <div>
+                        <div class="font-cinzel font-bold text-amber-500 text-xs uppercase tracking-wider mb-1">3. Glory Be (Gloria Patri)</div>
+                        <p class="text-stone-300 italic">"Glory be to the Father, and to the Son, and to the Holy Spirit. As it was in the beginning, is now, and ever shall be, world without end. Amen."</p>
+                    </div>
+
+                    <div>
+                        <div class="font-cinzel font-bold text-amber-500 text-xs uppercase tracking-wider mb-1">4. St. Michael Prayer</div>
+                        <p class="text-stone-300 italic">"Saint Michael the Archangel, defend us in battle. Be our protection against the wickedness and snares of the devil. May God rebuke him, we humbly pray; and do thou, O Prince of the Heavenly Host, by the power of God, cast into hell Satan and all the evil spirits who prowl about the world seeking the ruin of souls. Amen."</p>
+                    </div>
+
+                    <div class="border-t border-stone-800 pt-2">
+                        <div class="font-cinzel font-bold text-amber-500 text-xs uppercase tracking-wider mb-1">5. Prayer of Liberation & Sign of the Cross</div>
+                        <p class="text-stone-200 font-bold italic">"By the sign of the Holy Cross, O Lord, Our God, free us from our enemies. In the name of the Father, and of the Son, and of the Holy Spirit. + Amen."</p>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        /* APPLICATION STATE */
+        let state = {
+            currentDay: 1,
+            completedScriptures: JSON.parse(localStorage.getItem('mb_completed_scriptures')) || [],
+            completedCharities: JSON.parse(localStorage.getItem('mb_completed_charities')) || [],
+            completedDisciplines: JSON.parse(localStorage.getItem('mb_completed_disciplines')) || [],
+            journalIntentions: localStorage.getItem('mb_journal_intentions') || "",
+            journalReflections: localStorage.getItem('mb_journal_reflections') || "",
+            activeFilter: 'ALL',
+            timerRemaining: 900, // 15 minutes = 900 seconds
+            timerRunning: false,
+            timerInterval: null
+        };
+
+        /* CHART INSTANCES */
+        let radarChartInstance = null;
+        let progressChartInstance = null;
+
+        /* INITIALIZATION ON DOM LOAD */
+        document.addEventListener("DOMContentLoaded", () => {
+            renderDayGrid();
+            renderDayContent(state.currentDay);
+            loadJournal();
+            initCharts();
+            updateGlobalProgress();
+        });
+
+        /* RENDER DAY SELECTION GRID */
+        function renderDayGrid() {
+            const grid = document.getElementById('day-grid');
+            grid.innerHTML = '';
+
+            dayData.forEach(d => {
+                if (state.activeFilter !== 'ALL' && !d.patriarch.includes(state.activeFilter)) {
+                    return;
+                }
+
+                const isCompleted = isDayFullyComplete(d.day);
+                const isActive = d.day === state.currentDay;
+
+                const btn = document.createElement('button');
+                btn.onclick = () => selectDay(d.day);
+                btn.className = `p-2.5 rounded text-left border transition-all flex flex-col justify-between h-20 ${
+                    isActive 
+                        ? 'bg-amber-800 text-white border-amber-900 shadow-md ring-2 ring-amber-700/30' 
+                        : isCompleted
+                            ? 'bg-stone-100 border-amber-700/40 text-stone-800'
+                            : 'bg-white border-stone-200 text-stone-700 hover:bg-stone-50'
+                }`;
+
+                btn.innerHTML = `
+                    <div class="flex items-center justify-between w-full">
+                        <span class="font-cinzel text-xs font-bold ${isActive ? 'text-amber-200' : 'text-amber-800'}">DAY ${d.day}</span>
+                        ${isCompleted ? '<span class="text-xs">✔️</span>' : ''}
+                    </div>
+                    <div class="font-semibold text-xs truncate w-full ${isActive ? 'text-white' : 'text-stone-800'}">${d.patriarch}</div>
+                    <div class="text-[10px] opacity-80 truncate w-full">${d.theme}</div>
+                `;
+                grid.appendChild(btn);
+            });
+        }
+
+        /* FILTER DAYS */
+        function filterDays(filter) {
+            state.activeFilter = filter;
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                if (btn.getAttribute('data-filter') === filter) {
+                    btn.className = "px-3 py-1.5 rounded border border-amber-800 bg-amber-800 text-white font-medium filter-btn";
+                } else {
+                    btn.className = "px-3 py-1.5 rounded border border-stone-300 bg-white text-stone-700 hover:bg-stone-100 font-medium filter-btn";
+                }
+            });
+            renderDayGrid();
+        }
+
+        /* SELECT DAY */
+        function selectDay(dayNum) {
+            state.currentDay = dayNum;
+            renderDayGrid();
+            renderDayContent(dayNum);
+            updateCharts();
+            resetTimer();
+        }
+
+        /* HELPER: IS DAY COMPLETE */
+        function isDayFullyComplete(dayNum) {
+            return state.completedScriptures.includes(dayNum) &&
+                   state.completedCharities.includes(dayNum) &&
+                   state.completedDisciplines.includes(dayNum);
+        }
+
+        /* RENDER DEVOTIONAL CONTENT FOR SELECTED DAY */
+        function renderDayContent(dayNum) {
+            const data = dayData.find(d => d.day === dayNum);
+            const container = document.getElementById('devotional-display');
+
+            const isScriptureDone = state.completedScriptures.includes(dayNum);
+            const isCharityDone = state.completedCharities.includes(dayNum);
+            const isDisciplineDone = state.completedDisciplines.includes(dayNum);
+
+            container.innerHTML = `
+                <!-- DAY HEADER -->
+                <div class="border-b border-stone-200 pb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <div class="inline-flex flex-wrap items-center gap-2 text-xs font-bold text-amber-800 uppercase tracking-widest mb-1">
+                            <span>Day ${data.day} of 10</span>
+                            <span>•</span>
+                            <span>Patriarch: ${data.patriarch}</span>
+                            <span>•</span>
+                            <span>Focus: ${data.theme}</span>
+                        </div>
+                        <h2 class="font-cinzel text-2xl sm:text-3xl font-bold text-stone-900">${data.title}</h2>
+                        <p class="text-xs text-stone-500 mt-1">Scripture Passage: <span class="font-semibold text-stone-700">${data.passageRef} (Douay-Rheims Vulgate)</span></p>
+                    </div>
+
+                    <div class="flex items-center space-x-2">
+                        <button onclick="toggleRequirement('scripture', ${data.day})" class="px-3 py-1.5 rounded text-xs font-semibold border transition-all ${isScriptureDone ? 'bg-amber-800 text-white border-amber-900' : 'bg-stone-100 text-stone-700 border-stone-300 hover:bg-stone-200'}">
+                            ${isScriptureDone ? '✓ Scripture Read' : 'Mark Scripture Read'}
+                        </button>
+                    </div>
+                </div>
+
+                <!-- SCRIPTURE BLOCKQUOTE -->
+                <div class="bg-parchment p-6 rounded-lg border-l-4 border-amber-800 shadow-inner space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="font-cinzel font-bold text-xs text-amber-800 uppercase tracking-wider">Sacred Scripture (DRA)</span>
+                        <span class="text-xs text-stone-500 font-serif italic">${data.passageRef}</span>
+                    </div>
+                    <blockquote class="font-serif italic text-stone-800 text-base sm:text-lg leading-relaxed">
+                        ${data.scripture}
+                    </blockquote>
+                </div>
+
+                <!-- TWO-COLUMN LAYOUT: CONTEXT & THEOLOGY -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Historical & Exegetical Context -->
+                    <div class="space-y-3">
+                        <h3 class="font-cinzel font-bold text-lg text-stone-900 flex items-center space-x-2">
+                            <span class="text-amber-800">📜</span>
+                            <span>Biblical & Historical Context</span>
+                        </h3>
+                        <p class="font-serif text-stone-700 text-sm leading-relaxed text-justify">
+                            ${data.context}
+                        </p>
+                    </div>
+
+                    <!-- Theological Significance -->
+                    <div class="space-y-3">
+                        <h3 class="font-cinzel font-bold text-lg text-stone-900 flex items-center space-x-2">
+                            <span class="text-amber-800">✝</span>
+                            <span>Theological Significance & Typology</span>
+                        </h3>
+                        <p class="font-serif text-stone-700 text-sm leading-relaxed text-justify">
+                            ${data.theology}
+                        </p>
+                    </div>
+                </div>
+
+                <!-- A MAN'S REFLECTION & PRESCRIBED PRAYER -->
+                <div class="bg-stone-50 p-6 rounded-lg border border-stone-200 space-y-4">
+                    <div class="space-y-2">
+                        <h3 class="font-cinzel font-bold text-lg text-stone-900">A Man's Reflection</h3>
+                        <p class="font-serif text-stone-700 text-sm leading-relaxed">
+                            ${data.reflection}
+                        </p>
+                    </div>
+
+                    <div class="border-t border-stone-200 pt-4 space-y-2">
+                        <div class="font-cinzel font-bold text-xs text-amber-800 uppercase tracking-wider">Prescribed Intercessory Prayer</div>
+                        <div class="font-serif italic text-stone-900 text-base bg-white p-4 rounded border border-stone-200 shadow-sm">
+                            ${data.prayer}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CONCRETE ACT OF CHARITY (DISCOMFORT FOCUS) -->
+                <div class="bg-amber-900/5 p-6 rounded-lg border border-amber-800/30 space-y-4">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-amber-800/20 pb-3">
+                        <div>
+                            <span class="text-xs font-bold text-amber-800 uppercase tracking-wider">Demanding Practical Discipline</span>
+                            <h3 class="font-cinzel font-bold text-xl text-stone-900">${data.charityTitle}</h3>
+                        </div>
+                        <button onclick="toggleRequirement('charity', ${data.day})" class="px-4 py-2 rounded text-xs font-semibold border transition-all ${isCharityDone ? 'bg-amber-800 text-white border-amber-900' : 'bg-white text-stone-800 border-stone-300 hover:bg-stone-50'}">
+                            ${isCharityDone ? '✓ Charity Completed' : 'Mark Charity Completed'}
+                        </button>
+                    </div>
+                    <p class="text-stone-700 text-sm leading-relaxed">
+                        ${data.charityDesc}
+                    </p>
+                </div>
+
+                <!-- CONCLUDING ASCETICAL DISCIPLINE, TIMER, & ACCORDION PRAYERS -->
+                <div class="bg-stone-900 text-stone-100 p-6 sm:p-8 rounded-lg border border-stone-800 space-y-6">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-stone-800 pb-4">
+                        <div>
+                            <span class="text-xs font-bold text-amber-500 uppercase tracking-widest">Daily Concluding Mortification</span>
+                            <h3 class="font-cinzel font-bold text-xl text-stone-100">15-Minute Rigid Kneeling Silence</h3>
+                        </div>
+                        <button onclick="toggleRequirement('discipline', ${data.day})" class="px-4 py-2 rounded text-xs font-semibold border transition-all ${isDisciplineDone ? 'bg-amber-700 text-white border-amber-800' : 'bg-stone-800 text-stone-300 border-stone-700 hover:bg-stone-700'}">
+                            ${isDisciplineDone ? '✓ Mortification Marked Complete' : 'Mark Discipline Complete'}
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+                        <div class="md:col-span-2 space-y-2 text-stone-300 text-xs sm:text-sm leading-relaxed">
+                            <p>${data.disciplineDesc}</p>
+                            <p class="text-stone-400 italic text-xs pt-2">
+                                <strong>Medical Adaptation Note:</strong> Modifications are explicitly permitted for medical necessity, wherein rigid standing, seated posture, or lying prostrate is appropriate.
+                            </p>
+                        </div>
+
+                        <!-- CANVAS TIMER DISPLAY -->
+                        <div class="flex flex-col items-center justify-center bg-stone-950 p-4 rounded-lg border border-stone-800 space-y-3">
+                            <div class="relative w-36 h-36 flex items-center justify-center">
+                                <canvas id="timerCanvas" width="144" height="144"></canvas>
+                                <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                                    <span id="timer-display-text" class="font-cinzel text-2xl font-bold text-amber-500">15:00</span>
+                                    <span class="text-[10px] text-stone-500 uppercase tracking-widest">Stillness</span>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2">
+                                <button id="timer-start-btn" onclick="toggleTimer()" class="px-3 py-1.5 bg-amber-800 hover:bg-amber-700 text-white rounded text-xs font-semibold">Start</button>
+                                <button onclick="resetTimer()" class="px-3 py-1.5 bg-stone-800 hover:bg-stone-700 text-stone-300 rounded text-xs font-semibold">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ACCORDION FOR MANDATORY PRAYERS -->
+                    ${mandatoryPrayersHTML}
+                </div>
+            `;
+
+            drawTimerCanvas();
+        }
+
+        /* TIMER LOGIC & CANVAS DRAWING */
+        function drawTimerCanvas() {
+            const canvas = document.getElementById('timerCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const width = canvas.width;
+            const height = canvas.height;
+            const radius = width / 2 - 10;
+
+            ctx.clearRect(0, 0, width, height);
+
+            // Background Circle
+            ctx.beginPath();
+            ctx.arc(width / 2, height / 2, radius, 0, 2 * Math.PI);
+            ctx.strokeStyle = '#292524';
+            ctx.lineWidth = 8;
+            ctx.stroke();
+
+            // Progress Arc
+            const total = 900;
+            const progress = (total - state.timerRemaining) / total;
+            const startAngle = -Math.PI / 2;
+            const endAngle = startAngle + (2 * Math.PI * progress);
+
+            ctx.beginPath();
+            ctx.arc(width / 2, height / 2, radius, startAngle, endAngle);
+            ctx.strokeStyle = '#b45309';
+            ctx.lineWidth = 8;
+            ctx.lineCap = 'round';
+            ctx.stroke();
+        }
+
+        function toggleTimer() {
+            if (state.timerRunning) {
+                clearInterval(state.timerInterval);
+                state.timerRunning = false;
+                document.getElementById('timer-start-btn').innerText = 'Resume';
+            } else {
+                state.timerRunning = true;
+                document.getElementById('timer-start-btn').innerText = 'Pause';
+                state.timerInterval = setInterval(() => {
+                    if (state.timerRemaining > 0) {
+                        state.timerRemaining--;
+                        updateTimerDisplay();
+                    } else {
+                        clearInterval(state.timerInterval);
+                        state.timerRunning = false;
+                        playChime();
+                        alert("15-Minute Silent Kneeling Prayer Completed. Unify your mortification with the Passion of Christ.");
+                        toggleRequirement('discipline', state.currentDay);
+                    }
+                }, 1000);
+            }
+        }
+
+        function resetTimer() {
+            clearInterval(state.timerInterval);
+            state.timerRunning = false;
+            state.timerRemaining = 900;
+            updateTimerDisplay();
+            const btn = document.getElementById('timer-start-btn');
+            if (btn) btn.innerText = 'Start';
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(state.timerRemaining / 60);
+            const seconds = state.timerRemaining % 60;
+            const text = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            const display = document.getElementById('timer-display-text');
+            if (display) display.innerText = text;
+            drawTimerCanvas();
+        }
+
+        /* WEB AUDIO API CHIME FOR TIMER COMPLETION */
+        function playChime() {
+            try {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (!AudioContext) return;
+                const ctx = new AudioContext();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(440, ctx.currentTime); // A4 bell tone
+                gain.gain.setValueAtTime(0.3, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 3);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start();
+                osc.stop(ctx.currentTime + 3);
+            } catch (e) {
+                console.log("Audio play blocked");
+            }
+        }
+
+        /* ACCORDION TOGGLE */
+        function togglePrayersAccordion() {
+            const body = document.getElementById('prayers-accordion-body');
+            const arrow = document.getElementById('accordion-arrow');
+            if (body.classList.contains('hidden')) {
+                body.classList.remove('hidden');
+                arrow.innerText = '▲';
+            } else {
+                body.classList.add('hidden');
+                arrow.innerText = '▼';
+            }
+        }
+
+        /* SYNC & PERSISTENCE LOGIC */
+        window.currentUser = null;
+
+        function saveToLocalStorage() {
+            localStorage.setItem('mb_completed_scriptures', JSON.stringify(state.completedScriptures));
+            localStorage.setItem('mb_completed_charities', JSON.stringify(state.completedCharities));
+            localStorage.setItem('mb_completed_disciplines', JSON.stringify(state.completedDisciplines));
+            localStorage.setItem('mb_journal_intentions', state.journalIntentions);
+            localStorage.setItem('mb_journal_reflections', state.journalReflections);
+        }
+
+        function loadFromLocalStorage() {
+            state.completedScriptures = JSON.parse(localStorage.getItem('mb_completed_scriptures')) || [];
+            state.completedCharities = JSON.parse(localStorage.getItem('mb_completed_charities')) || [];
+            state.completedDisciplines = JSON.parse(localStorage.getItem('mb_completed_disciplines')) || [];
+            state.journalIntentions = localStorage.getItem('mb_journal_intentions') || "";
+            state.journalReflections = localStorage.getItem('mb_journal_reflections') || "";
+        }
+
+        function setSyncStatus(status) {
+            const statusEl = document.getElementById('user-sync-status');
+            if (!statusEl) return;
+            if (status === 'syncing') {
+                statusEl.innerHTML = '<span class="inline-block w-1.5 h-1.5 rounded-full bg-amber-400 animate-ping"></span> Syncing...';
+            } else if (status === 'synced') {
+                statusEl.innerHTML = '<span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Synced';
+            } else if (status === 'error') {
+                statusEl.innerHTML = '<span class="inline-block w-1.5 h-1.5 rounded-full bg-red-400"></span> Sync Error';
+            }
+        }
+
+        function showToast(message, icon = "💾") {
+            const toast = document.getElementById('devotional-toast');
+            const toastMsg = document.getElementById('toast-message');
+            const toastIcon = document.getElementById('toast-icon');
+            if (!toast) return;
+            toastMsg.innerText = message;
+            toastIcon.innerText = icon;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+                toast.classList.remove('translate-y-0', 'opacity-100');
+            }, 3000);
+        }
+
+        async function syncState(isExplicitAction = false) {
+            // 1. Always save local cache
+            saveToLocalStorage();
+
+            // 2. If logged in with Firebase, sync to Firestore document
+            if (window.currentUser && window.DevotionalAuth) {
+                setSyncStatus('syncing');
+                try {
+                    await window.DevotionalAuth.saveUserData(window.currentUser.uid, state, {
+                        displayName: window.currentUser.displayName,
+                        email: window.currentUser.email,
+                        photoURL: window.currentUser.photoURL
+                    });
+                    setSyncStatus('synced');
+                    if (isExplicitAction) {
+                        showToast("Saved & synced to your Google Account.", "☁️");
+                    }
+                } catch (err) {
+                    console.error("Firestore sync failed:", err);
+                    setSyncStatus('error');
+                    if (isExplicitAction) {
+                        showToast("Saved locally. Cloud sync failed: " + (err.message || "Network error"), "⚠️");
+                    }
+                }
+            } else {
+                if (isExplicitAction) {
+                    showToast("Saved to browser storage. Sign in to sync across devices.", "💾");
+                }
+            }
+        }
+
+        /* TOGGLE REQUIREMENTS COMPLETION */
+        function toggleRequirement(type, dayNum) {
+            let list;
+            if (type === 'scripture') list = state.completedScriptures;
+            else if (type === 'charity') list = state.completedCharities;
+            else if (type === 'discipline') list = state.completedDisciplines;
+
+            const idx = list.indexOf(dayNum);
+            if (idx > -1) {
+                list.splice(idx, 1);
+            } else {
+                list.push(dayNum);
+            }
+
+            syncState(false);
+
+            renderDayGrid();
+            renderDayContent(dayNum);
+            updateGlobalProgress();
+            updateCharts();
+        }
+
+        /* UPDATE GLOBAL PROGRESS BAR */
+        function updateGlobalProgress() {
+            let fullyCompletedCount = 0;
+            for (let i = 1; i <= 10; i++) {
+                if (isDayFullyComplete(i)) fullyCompletedCount++;
+            }
+
+            const percent = (fullyCompletedCount / 10) * 100;
+            document.getElementById('global-progress-bar').style.width = `${percent}%`;
+            document.getElementById('global-progress-text').innerText = `${fullyCompletedCount} / 10 Days Completed`;
+        }
+
+        /* JOURNAL LOGIC */
+        function loadJournal() {
+            document.getElementById('journal-intentions').value = state.journalIntentions;
+            document.getElementById('journal-reflections').value = state.journalReflections;
+        }
+
+        function saveJournal() {
+            const intentions = document.getElementById('journal-intentions').value;
+            const reflections = document.getElementById('journal-reflections').value;
+            state.journalIntentions = intentions;
+            state.journalReflections = reflections;
+            syncState(true);
+        }
+
+        function clearJournal() {
+            if (confirm("Are you sure you want to clear your journal entries?")) {
+                document.getElementById('journal-intentions').value = "";
+                document.getElementById('journal-reflections').value = "";
+                state.journalIntentions = "";
+                state.journalReflections = "";
+                syncState(true);
+            }
+        }
+
+        /* GOOGLE AUTHENTICATION HANDLERS */
+        window.handleGoogleLogin = async function() {
+            if (!window.DevotionalAuth) {
+                showToast("Firebase module is loading. Please wait...", "⏳");
+                return;
+            }
+            if (!window.DevotionalAuth.isConfigured()) {
+                alert("Firebase is not configured yet.\n\nOpen firebase-config.js and insert your Firebase Web App credentials (apiKey, projectId, etc.) to enable Google Sign-In.");
+                return;
+            }
+            try {
+                await window.DevotionalAuth.loginWithGoogle();
+            } catch (err) {
+                if (err.code === 'auth/popup-closed-by-user') return;
+                if (err.code === 'auth/unauthorized-domain') {
+                    alert("This domain is not authorized in Firebase.\n\nAdd '" + window.location.hostname + "' in Firebase Console -> Authentication -> Settings -> Authorized Domains.");
+                    return;
+                }
+                alert("Google Sign-In failed: " + err.message);
+            }
+        };
+
+        window.handleSignOut = async function() {
+            if (!window.DevotionalAuth) return;
+            if (confirm("Sign out of your account? Your local progress will remain on this device.")) {
+                try {
+                    await window.DevotionalAuth.logoutUser();
+                } catch (err) {
+                    console.error("Sign out error:", err);
+                }
+            }
+        };
+
+        function setupAuthObserver() {
+            if (!window.DevotionalAuth) return;
+            window.DevotionalAuth.onAuthStateChange(async (user) => {
+                window.currentUser = user;
+                const btnLogin = document.getElementById('btn-google-login');
+                const menuProfile = document.getElementById('user-profile-menu');
+                const avatar = document.getElementById('user-avatar');
+                const displayName = document.getElementById('user-display-name');
+                const badge = document.getElementById('journal-storage-badge');
+
+                if (user) {
+                    if (btnLogin) btnLogin.classList.add('hidden');
+                    if (menuProfile) menuProfile.classList.remove('hidden');
+                    if (avatar) avatar.src = user.photoURL || 'https://www.gravatar.com/avatar/?d=mp';
+                    if (displayName) displayName.innerText = user.displayName || user.email || 'User';
+                    if (badge) {
+                        badge.innerHTML = `<span>☁️ Synced to Google Account (${user.email || user.displayName})</span>`;
+                        badge.className = "text-xs text-emerald-400 bg-emerald-950/60 border border-emerald-800/60 px-3 py-1.5 rounded flex items-center gap-1.5";
+                    }
+
+                    // Load user data from Cloud Firestore
+                    try {
+                        const cloudData = await window.DevotionalAuth.loadUserData(user.uid);
+                        if (cloudData) {
+                            state.completedScriptures = cloudData.completedScriptures || [];
+                            state.completedCharities = cloudData.completedCharities || [];
+                            state.completedDisciplines = cloudData.completedDisciplines || [];
+                            state.journalIntentions = cloudData.journalIntentions || "";
+                            state.journalReflections = cloudData.journalReflections || "";
+                            saveToLocalStorage();
+                        } else {
+                            // Seed new cloud account with local data
+                            await window.DevotionalAuth.saveUserData(user.uid, state, {
+                                displayName: user.displayName,
+                                email: user.email,
+                                photoURL: user.photoURL
+                            });
+                        }
+                        setSyncStatus('synced');
+                    } catch (err) {
+                        console.error("Failed to load user cloud data:", err);
+                        setSyncStatus('error');
+                    }
+                } else {
+                    if (btnLogin) btnLogin.classList.remove('hidden');
+                    if (menuProfile) menuProfile.classList.add('hidden');
+                    if (badge) {
+                        badge.innerHTML = `<span>💾 Auto-saved to Local Storage (Sign in to sync across devices)</span>`;
+                        badge.className = "text-xs text-amber-500 bg-amber-950/60 border border-amber-800/60 px-3 py-1.5 rounded flex items-center gap-1.5";
+                    }
+                    loadFromLocalStorage();
+                }
+
+                // Refresh UI with user's data
+                renderDayGrid();
+                renderDayContent(state.currentDay);
+                loadJournal();
+                updateGlobalProgress();
+                updateCharts();
+            });
+        }
+
+        window.addEventListener('auth-ready', setupAuthObserver);
+        if (window.DevotionalAuth) {
+            setupAuthObserver();
+        }
+
+        /* CHART.JS INITIALIZATION & UPDATES */
+        function initCharts() {
+            // Radar Chart Initialization
+            const radarCtx = document.getElementById('intercessionRadarChart').getContext('2d');
+            const currentDayObj = dayData.find(d => d.day === state.currentDay);
+
+            radarChartInstance = new Chart(radarCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['Selfless Humility', 'Physical Strain', 'Prophetic Courage', 'Social Friction'],
+                    datasets: [{
+                        label: `Day ${currentDayObj.day}: ${currentDayObj.title}`,
+                        data: currentDayObj.radarScores,
+                        backgroundColor: 'rgba(180, 83, 9, 0.2)',
+                        borderColor: '#b45309',
+                        pointBackgroundColor: '#78350f',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: { color: '#e7e5e4' },
+                            grid: { color: '#e7e5e4' },
+                            pointLabels: {
+                                font: { family: 'Cinzel', size: 11, weight: 'bold' },
+                                color: '#292524'
+                            },
+                            suggestedMin: 0,
+                            suggestedMax: 10
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: { font: { family: 'Inter', size: 12 } }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.dataset.label}: ${context.raw} / 10 intensity`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Doughnut Progress Chart
+            const progressCtx = document.getElementById('completionProgressChart').getContext('2d');
+            progressChartInstance = new Chart(progressCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Scriptures Read', 'Charities Done', 'Mortifications Done', 'Remaining Requirements'],
+                    datasets: [{
+                        data: calculateProgressDataset(),
+                        backgroundColor: ['#b45309', '#92400e', '#78350f', '#e7e5e4'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: { font: { family: 'Inter', size: 11 } }
+                        }
+                    }
+                }
+            });
+        }
+
+        function calculateProgressDataset() {
+            const scCount = state.completedScriptures.length;
+            const chCount = state.completedCharities.length;
+            const disCount = state.completedDisciplines.length;
+            const remaining = 30 - (scCount + chCount + disCount);
+            return [scCount, chCount, disCount, remaining < 0 ? 0 : remaining];
+        }
+
+        function updateCharts() {
+            if (radarChartInstance) {
+                const currentDayObj = dayData.find(d => d.day === state.currentDay);
+                radarChartInstance.data.datasets[0].label = `Day ${currentDayObj.day}: ${currentDayObj.title}`;
+                radarChartInstance.data.datasets[0].data = currentDayObj.radarScores;
+                radarChartInstance.update();
+            }
+
+            if (progressChartInstance) {
+                progressChartInstance.data.datasets[0].data = calculateProgressDataset();
+                progressChartInstance.update();
+            }
+        }
+    </script>
+</body>
+</html>
