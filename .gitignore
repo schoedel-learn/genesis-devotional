@@ -1,5 +1,30 @@
+# Firebase CLI working files and deploy history
 .firebase/
 firebase-debug.log*
 firestore-debug.log*
+ui-debug.log
+
+# Service account keys — never publish these
+*-firebase-adminsdk-*.json
+serviceAccount*.json
+
+# Cloud Functions dependencies and secrets
+functions/node_modules/
+functions/.env
+functions/.env.*
+node_modules/
+
+# Environment files anywhere in the tree
+.env
+.env.local
+.env.*.local
+
+# Python bytecode from the helper scripts
+__pycache__/
+*.pyc
+
+# Editor and OS noise
 .DS_Store
 *.swp
+*.swo
+*~

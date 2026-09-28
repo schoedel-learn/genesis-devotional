@@ -17,7 +17,8 @@
       "**/.*",
       "**/.*/**",
       "**/node_modules/**",
-      "**/*.log"
+      "**/*.log",
+      "functions/**"
     ],
     "headers": [
       {
@@ -31,14 +32,66 @@
         "headers": [
           { "key": "Cache-Control", "value": "no-cache, must-revalidate" }
         ]
+      },
+      {
+        "source": "/genesis/**",
+        "headers": [
+          { "key": "Cache-Control", "value": "no-cache, must-revalidate" }
+        ]
+      },
+      {
+        "source": "/shared/**",
+        "headers": [
+          { "key": "Cache-Control", "value": "no-cache, must-revalidate" }
+        ]
+      },
+      {
+        "source": "/sw.js",
+        "headers": [
+          { "key": "Cache-Control", "value": "no-cache, must-revalidate" }
+        ]
+      },
+      {
+        "source": "/manifest.webmanifest",
+        "headers": [
+          { "key": "Cache-Control", "value": "no-cache, must-revalidate" },
+          { "key": "Content-Type", "value": "application/manifest+json" }
+        ]
+      },
+      {
+        "source": "/api/**",
+        "headers": [
+          { "key": "Cache-Control", "value": "no-store" }
+        ]
+      }
+    ],
+    "rewrites": [
+      {
+        "source": "/api/create-checkout",
+        "function": {
+          "functionId": "createCheckoutSession"
+        }
+      },
+      {
+        "source": "/api/stripe-webhook",
+        "function": {
+          "functionId": "stripeWebhook"
+        }
       }
     ],
     "redirects": [
       {
         "source": "/genesis_devotional_guide.html",
-        "destination": "/",
+        "destination": "/genesis/",
         "type": 301
       }
     ]
-  }
+  },
+  "functions": [
+    {
+      "source": "functions",
+      "codebase": "default",
+      "runtime": "nodejs22"
+    }
+  ]
 }

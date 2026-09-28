@@ -1,18 +1,30 @@
 /* Service worker for The Patriarchs' Altar.
    Makes the app work offline: the reading, the prayers, the timer and the
    journal (saved in localStorage) all keep working with no signal.
-   Bump CACHE_VERSION whenever index.html changes a lot, to drop old copies. */
 
-const CACHE_VERSION = 'v2';
+   Bump CACHE_VERSION whenever the HTML or the shared modules change a lot,
+   to drop old copies. */
+
+const CACHE_VERSION = 'v9';
 const CORE_CACHE = `altar-core-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `altar-runtime-${CACHE_VERSION}`;
 
-/* Everything needed for a complete offline reading. */
+/* Everything needed for a complete offline reading.
+
+   Two entry points live in this worker's scope: the section catalog at "/"
+   and the Genesis devotional at "/genesis/". Both share the modules under
+   /shared/. Every path is absolute, because the worker is registered from
+   both pages at scope "/". */
 const CORE_ASSETS = [
   '/',
   '/index.html',
-  '/firebase-config.js',
+  '/genesis/',
+  '/genesis/index.html',
+  '/shared/firebase-config.js',
+  '/shared/access-gate.js',
+  '/shared/stripe-checkout.js',
   '/manifest.webmanifest',
+  '/genesis/manifest.webmanifest',
   '/favicon.png',
   '/icon-192.png',
   '/icon-512.png',
@@ -40,12 +52,17 @@ const CACHEABLE_HOSTS = [
   'fonts.gstatic.com'
 ];
 
+/* Requests that must never be served from cache, even a stale one: the
+   things that decide access and move money. */
+const NEVER_CACHE = ['/api/'];
+
 self.addEventListener('install', (event) => {
   event.waitUntil((async () => {
     const cache = await caches.open(CORE_CACHE);
-    // Our own files must all install, or the offline experience is broken.
-    await cache.addAll(CORE_ASSETS.map((u) => new Request(u, { cache: 'reload' })))
-      .catch(() => {});
+    // One by one, so a single 404 cannot abort the whole install.
+    await Promise.allSettled(
+      CORE_ASSETS.map((u) => cache.add(new Request(u, { cache: 'reload' })))
+    );
     // Third-party assets: best effort, never fatal.
     for (const url of CDN_ASSETS) {
       try {
@@ -92,16 +109,33 @@ self.addEventListener('fetch', (event) => {
 
   const url = new URL(request.url);
 
-  // Page loads: try the network so edits show up, fall back to the saved copy.
+  // Access checks and checkout calls always go to the network.
+  if (url.origin === self.location.origin &&
+      NEVER_CACHE.some((p) => url.pathname.startsWith(p))) {
+    return;
+  }
+
+  // Page loads: try the network so edits show up, fall back to the saved
+  // copy OF THAT SAME PAGE. (Saving every page under one key would serve the
+  // Genesis reading to a visitor who asked for the catalog.)
   if (request.mode === 'navigate') {
     event.respondWith(
       fetch(request)
         .then((response) => {
           const copy = response.clone();
-          caches.open(CORE_CACHE).then((cache) => cache.put('/index.html', copy)).catch(() => {});
+          caches.open(CORE_CACHE)
+            .then((cache) => cache.put(request, copy))
+            .catch(() => {});
           return response;
         })
-        .catch(() => caches.match('/index.html').then((r) => r || caches.match('/')))
+        .catch(async () => {
+          const exact = await caches.match(request);
+          if (exact) return exact;
+          // Last resort: whatever we do have saved.
+          return (await caches.match('/genesis/index.html')) ||
+                 (await caches.match('/index.html')) ||
+                 Response.error();
+        })
     );
     return;
   }

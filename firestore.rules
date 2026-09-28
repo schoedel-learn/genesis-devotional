@@ -1,9 +1,64 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Each user can strictly only read and write their own devotional record
+
+    // ---------------------------------------------------------------------
+    // Individual user profile & devotional progress.
+    //
+    // A signed-in user may read any profile (the Fathers' accountability
+    // board lists the whole cohort) and may write only their own.
+    //
+    // Access-related fields are deliberately NOT writable from the browser:
+    // if a client could set `purchasedSections` or `grandfathered` on its own
+    // profile, every paywall in the app would be bypassable with a one-line
+    // console call. Entitlements therefore live in the read-only
+    // /users/{uid}/entitlements document, written only by Cloud Functions.
+    // ---------------------------------------------------------------------
     match /users/{userId} {
-      allow read, write: if request.auth != null && request.auth.uid == userId;
+      allow read: if request.auth != null;
+      // Two cases, because `resource` is null when the document does not exist
+      // yet (a brand-new user's first save). On create, the protected keys must
+      // simply be absent; on update, they must be untouched.
+      allow write: if request.auth != null
+                   && request.auth.uid == userId
+                   && (resource == null
+                       ? !request.resource.data.keys()
+                            .hasAny(['purchasedSections', 'grandfathered', 'entitlements'])
+                       : !request.resource.data.diff(resource.data)
+                            .affectedKeys()
+                            .hasAny(['purchasedSections', 'grandfathered', 'entitlements']));
+
+      // Entitlement ledger — the single source of truth for what this user
+      // has paid for. Readable by its owner so the access gate can check it;
+      // writable only by the Admin SDK (Cloud Functions / server jobs).
+      match /entitlements/{document} {
+        allow read: if request.auth != null && request.auth.uid == userId;
+        allow write: if false;
+      }
+
+      // Purchase receipts — only Cloud Functions (admin SDK) can write.
+      match /purchases/{purchaseId} {
+        allow read: if request.auth != null && request.auth.uid == userId;
+        allow write: if false;
+      }
+    }
+
+    // Multi-tenant fathers' cohorts
+    match /groups/{groupId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
+
+      // Group members progress & checklists
+      match /members/{userId} {
+        allow read: if request.auth != null;
+        allow write: if request.auth != null && request.auth.uid == userId;
+      }
+    }
+
+    // Global performance & impact analytics across all cohorts
+    match /stats/{statId} {
+      allow read: if true;
+      allow write: if request.auth != null;
     }
   }
 }
